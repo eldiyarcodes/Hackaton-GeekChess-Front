@@ -1,1 +1,1 @@
-export { AuthPage } from './view/auth-screen'
+export { SignupForm } from './view/signup-form'
