@@ -1,0 +1,47 @@
+.cell {
+	width: 64px;
+	height: 64px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	img {
+		width: 56px;
+		height: 56px;
+		position: relative;
+		cursor: pointer;
+	}
+
+	.available {
+		width: 14px;
+		height: 14px;
+		border-radius: 50%;
+		background-color: #8fbc8b;
+	}
+}
+
+.black {
+	background-color: #a0522d;
+}
+
+.white {
+	background-color: #f5deb3;
+}
+
+.selected {
+	position: relative;
+	border-radius: 8px;
+	box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6),
+		inset 0 0 6px rgba(0, 0, 0, 0.4);
+	transition: box-shadow 0.2s ease-in-out;
+	z-index: 2;
+}
+
+.takeFigure {
+	position: relative;
+	border-radius: 8px;
+	box-shadow: inset 0 0 10px rgba(0, 128, 0, 0.6),
+		inset 0 0 6px rgba(0, 255, 0, 0.4);
+	transition: box-shadow 0.2s ease-in-out;
+	z-index: 2;
+}

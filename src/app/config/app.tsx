@@ -10,6 +10,7 @@ export const App: FC = () => {
 			<Routes>
 				<Route path={AppRoutes.HOME} element={<AuthPage />} />
 				<Route path={AppRoutes.GAME_ROOM} element={<GameRoom />} />
+				<Route path={AppRoutes.NOT_FOUND} element={<div>Page Not Found</div>} />
 			</Routes>
 		</BrowserRouter>
 	)
