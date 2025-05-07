@@ -1,8 +1,8 @@
 import type { FC } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { AppRoutes } from '../../shared/consts/consts'
 import { AuthPage } from '../../pages/auth/auth-page'
 import { GameRoom } from '../../pages/game-room/game-room'
+import { AppRoutes } from '../../shared/consts/consts'
 
 export const App: FC = () => {
 	return (
@@ -10,6 +10,7 @@ export const App: FC = () => {
 			<Routes>
 				<Route path={AppRoutes.HOME} element={<AuthPage />} />
 				<Route path={AppRoutes.GAME_ROOM} element={<GameRoom />} />
+				<Route path={AppRoutes.NOT_FOUND} element={<div>Page Not Found</div>} />
 			</Routes>
 		</BrowserRouter>
 	)
