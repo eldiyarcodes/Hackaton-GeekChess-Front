@@ -43,9 +43,9 @@ export class Board {
 
 			for (let j = 0; j < 8; j++) {
 				if ((i + j) % 2 !== 0) {
-					row.push(new Cell(this, j, i, Colors.BLACK, null, null)) // Black cells
+					row.push(new Cell(this, j, i, Colors.BLACK, null, null))
 				} else {
-					row.push(new Cell(this, j, i, Colors.WHITE, null, null)) // White
+					row.push(new Cell(this, j, i, Colors.WHITE, null, null))
 				}
 			}
 
@@ -109,6 +109,12 @@ export class Board {
 				}
 
 				to.coin = null
+
+				const newCell = this.getRandomEmptyCell()
+				if (newCell) {
+					const newCoin = new Coin(newCell, this.getRandomNaminal())
+					newCell.coin = newCoin
+				}
 			}
 		}
 	}

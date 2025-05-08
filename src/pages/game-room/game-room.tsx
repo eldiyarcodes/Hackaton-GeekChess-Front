@@ -1,8 +1,9 @@
 import { useEffect, useState, type FC } from 'react'
+import { ScoreCoins } from '../../entities/score-coins'
 import { BoardComponent } from '../../features/board'
 import { Board } from '../../features/board/model/board'
+import { LeaderBoard } from '../../features/leader-board'
 import classes from './game-room.module.scss'
-import { ScoreCoins } from '../../entities/score-coins'
 
 export const GameRoom: FC = () => {
 	const [board, setBoard] = useState(new Board())
@@ -25,13 +26,16 @@ export const GameRoom: FC = () => {
 		lotCoin250: board.lostCoint250,
 		lotCoin300: board.lostCoint300,
 		lotCoin350: board.lostCoint350,
-		totalScore: board.totalScore
+		totalScore: board.totalScore,
 	}
 
 	return (
 		<div className={classes.room}>
-			<BoardComponent board={board} setBoard={setBoard} />
-			<ScoreCoins coins={scoreBoardCoins} />
+			<div className={classes.container}>
+				<LeaderBoard />
+				<BoardComponent board={board} setBoard={setBoard} />
+				<ScoreCoins coins={scoreBoardCoins} />
+			</div>
 		</div>
 	)
 }

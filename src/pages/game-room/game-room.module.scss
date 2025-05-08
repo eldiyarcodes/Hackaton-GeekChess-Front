@@ -1,6 +1,16 @@
 .room {
-	padding-top: 42px;
-	display: flex;
-	justify-content: center;
-	gap: 50px;
+	height: 100vh;
+	background-image: url('../../shared/assets/images/Geeks_pattern_grey1.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	.container {
+		max-width: 1440px;
+		width: 100%;
+		margin: 0 auto;
+		padding-top: 42px;
+		display: flex;
+		justify-content: space-between;
+		gap: 50px;
+	}
 }

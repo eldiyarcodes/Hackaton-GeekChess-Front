@@ -51,7 +51,8 @@ export const BoardComponent: FC<{
 	}
 
 	return (
-		<div>
+		<div className={classes.wrapper}>
+			<div className={classes.userName}>{'Geeks Baike'}</div>
 			<div className={classes.board}>
 				{board.cells.map((row, idx) => (
 					<React.Fragment key={idx}>

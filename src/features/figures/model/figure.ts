@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid'
-import knightLogo from '../../../shared/assets/white-knight.svg'
+import knightLogo from '../../../shared/assets/images/white-knight.svg'
 
 import { FigureNames, type Colors } from '../../../shared/utils/consts/consts'
 import type { Cell } from '../../cell/model/cell'
