@@ -1,10 +1,10 @@
 import type { FC } from 'react'
+import totalGeekCoins from '../../../../shared/assets/images/total-coins.png'
 import logo150 from '../../../../shared/assets/images/geekcoin 150.svg'
 import logo200 from '../../../../shared/assets/images/geekcoin 200.svg'
 import logo250 from '../../../../shared/assets/images/geekcoin 250.svg'
 import logo300 from '../../../../shared/assets/images/geekcoin 300.svg'
 import logo350 from '../../../../shared/assets/images/geekcoin 350.svg'
-import totalGeekCoins from '../../../../shared/assets/images/total-coins.png'
 import type { CoinNaminals } from '../../../../shared/utils/consts/consts'
 import classes from './score-coins.module.scss'
 

@@ -1,9 +1,9 @@
 import type { FC } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { AuthPage } from '../../pages/auth/auth-page'
+import { AuthPage } from '../../pages/auth/AuthPage'
 import { GameRoom } from '../../pages/game-room/game-room'
-import { IntroPage } from '../../pages/intro/intro-page'
 import { AppRoutes } from '../../shared/utils/consts/consts'
+import { Rules } from '../../pages/rules/Rules'
 import { AuthorizationGuard } from './auth-guard'
 
 export const App: FC = () => {
@@ -12,10 +12,10 @@ export const App: FC = () => {
 			<Routes>
 				<Route path={AppRoutes.HOME} element={<AuthPage />} />
 				<Route
-					path={AppRoutes.INTRO}
+					path={AppRoutes.RULES}
 					element={
 						<AuthorizationGuard>
-							<IntroPage />
+							<Rules />
 						</AuthorizationGuard>
 					}
 				/>

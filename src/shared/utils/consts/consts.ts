@@ -1,7 +1,7 @@
 export const AppRoutes = {
 	HOME: '/',
 	GAME_ROOM: '/game',
-	INTRO: '/intro',
+	RULES: '/rules',
 	NOT_FOUND: '*',
 } as const
 

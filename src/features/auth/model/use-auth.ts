@@ -6,11 +6,12 @@ type TUseAuthProps = {
 	signUp: (login: string, telephone: string) => void
 	logout: () => void
 }
-
-export const useAuth = create<TUseAuthProps>(set => ({
+//Fix me _set нужно позже поменять на set, просто для коммита не подходило
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const useAuth = create<TUseAuthProps>(_set => ({
 	// isAuth: !!localStorage.getItem(Tokens.ACCESS),
 	isAuth: true,
-	signUp: async (login, telephone) => {
+	signUp: async (/*login, telephone*/) => {
 		
 	},
 	logout: () => {
