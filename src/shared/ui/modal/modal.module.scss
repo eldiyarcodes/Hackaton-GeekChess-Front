@@ -5,6 +5,7 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,18 +25,19 @@
   border-radius: 16px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   .title {
-    margin-bottom: 24px;
+    margin-bottom: 35px;
+    font-size: 28px;
 
-    @include flexbox(center, space-between);
-    @include breakpoint(mobile) {
-      margin-bottom: 20px;
-    }
+    // @include flexbox(center, space-between);
+    // @include breakpoint(mobile) {
+    //   margin-bottom: 20px;
+    // }
 
-    h1 {
-      @include breakpoint(mobile) {
-        font-size: 18px;
-      }
-    }
+    // h1 {
+    //   @include breakpoint(mobile) {
+    //     font-size: 18px;
+    //   }
+    // }
 
     .icon {
       cursor: pointer;

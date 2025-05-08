@@ -8,7 +8,7 @@ import classes from './modal.module.scss'
 
 interface IModalProps {
 	isOpen: boolean
-	onClose: () => void
+	onClose?: () => void
 	children?: ReactNode
 	title: string
 	closebtn?: boolean

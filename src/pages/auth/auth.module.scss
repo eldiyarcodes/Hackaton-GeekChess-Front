@@ -109,8 +109,7 @@
       padding-left: 16px;
       border-radius: 5px;
       &:focus {
-        outline: none;
-        border-color: transparent;
+        outline: 0.1px solid #f5d91f;
       }
     }
   }
