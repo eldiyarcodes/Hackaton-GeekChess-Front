@@ -8,6 +8,9 @@ export const CellComponent: FC<{
 	selected: boolean
 	onClick: (cell: Cell) => void
 }> = ({ cell, selected, onClick }) => {
+	console.log('Figure: ', cell.figure)
+	console.log('Coin: ', cell.coin)
+
 	return (
 		<div
 			className={clsx(

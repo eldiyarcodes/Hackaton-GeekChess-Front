@@ -10,7 +10,9 @@ type TUseAuthProps = {
 export const useAuth = create<TUseAuthProps>(set => ({
 	// isAuth: !!localStorage.getItem(Tokens.ACCESS),
 	isAuth: true,
-	signUp: (login, telephone) => {},
+	signUp: async (login, telephone) => {
+		
+	},
 	logout: () => {
 		localStorage.removeItem(Tokens.ACCESS)
 	},

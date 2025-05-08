@@ -15,15 +15,19 @@ export class Board {
 		const flatCells = this.cells.flat()
 		const emptyCells = flatCells.filter(cell => !cell.figure && !cell.coin)
 
-		if (emptyCells.length === 0) return null
+		if (emptyCells.length === 0) {
+			return null
+		}
 
 		const randomIndex = Math.floor(Math.random() * emptyCells.length)
+
 		return emptyCells[randomIndex]
 	}
 
 	private getRandomNaminal(): CoinNaminals {
 		const naminals = Object.values(CoinNaminals)
 		const randomIndex = Math.floor(Math.random() * naminals.length)
+
 		return naminals[randomIndex]
 	}
 
@@ -88,6 +92,7 @@ export class Board {
 	public moveFigure(from: Cell, to: Cell) {
 		if (from.figure && from.figure.canMove(to)) {
 			from.figure.moveFigure(to)
+			from.figure = null
 
 			if (to.coin) {
 				switch (to.coin.naminal) {
