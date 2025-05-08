@@ -2,7 +2,7 @@ import type { FC } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { AuthPage } from '../../pages/auth/auth-page'
 import { GameRoom } from '../../pages/game-room/game-room'
-import { AppRoutes } from '../../shared/consts/consts'
+import { AppRoutes } from '../../shared/utils/consts/consts'
 
 export const App: FC = () => {
 	return (

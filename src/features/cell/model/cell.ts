@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
-import { CoinNaminals, Colors } from '../../../shared/consts/consts'
+import type { Coin } from '../../../entities/coin/model/coin'
+import { CoinNaminals, Colors } from '../../../shared/utils/consts/consts'
 import type { Board } from '../../board/model/board'
-import type { Coin } from '../../coin/model/coin'
 import type { Figure } from '../../figures/model/figure'
 
 export class Cell {

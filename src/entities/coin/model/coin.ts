@@ -5,12 +5,12 @@ import logo250 from '../../../shared/assets/geekcoin 250.svg'
 import logo300 from '../../../shared/assets/geekcoin 300.svg'
 import logo350 from '../../../shared/assets/geekcoin 350.svg'
 
-import { CoinNaminals } from '../../../shared/consts/consts'
-import type { Cell } from '../../cell/model/cell'
+import type { Cell } from '../../../features/cell/model/cell'
+import { CoinNaminals } from '../../../shared/utils/consts/consts'
 
 export class Coin {
 	id: string
-	logo: typeof logo200 | null
+	logo: typeof logo150 | null
 	cell: Cell
 	naminal: CoinNaminals
 
