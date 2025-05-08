@@ -15,15 +15,19 @@ export class Board {
 		const flatCells = this.cells.flat()
 		const emptyCells = flatCells.filter(cell => !cell.figure && !cell.coin)
 
-		if (emptyCells.length === 0) return null
+		if (emptyCells.length === 0) {
+			return null
+		}
 
 		const randomIndex = Math.floor(Math.random() * emptyCells.length)
+
 		return emptyCells[randomIndex]
 	}
 
 	private getRandomNaminal(): CoinNaminals {
 		const naminals = Object.values(CoinNaminals)
 		const randomIndex = Math.floor(Math.random() * naminals.length)
+
 		return naminals[randomIndex]
 	}
 
@@ -43,9 +47,9 @@ export class Board {
 
 			for (let j = 0; j < 8; j++) {
 				if ((i + j) % 2 !== 0) {
-					row.push(new Cell(this, j, i, Colors.BLACK, null, null)) // Black cells
+					row.push(new Cell(this, j, i, Colors.BLACK, null, null))
 				} else {
-					row.push(new Cell(this, j, i, Colors.WHITE, null, null)) // White
+					row.push(new Cell(this, j, i, Colors.WHITE, null, null))
 				}
 			}
 
@@ -88,6 +92,7 @@ export class Board {
 	public moveFigure(from: Cell, to: Cell) {
 		if (from.figure && from.figure.canMove(to)) {
 			from.figure.moveFigure(to)
+			from.figure = null
 
 			if (to.coin) {
 				switch (to.coin.naminal) {
@@ -109,6 +114,12 @@ export class Board {
 				}
 
 				to.coin = null
+
+				const newCell = this.getRandomEmptyCell()
+				if (newCell) {
+					const newCoin = new Coin(newCell, this.getRandomNaminal())
+					newCell.coin = newCoin
+				}
 			}
 		}
 	}

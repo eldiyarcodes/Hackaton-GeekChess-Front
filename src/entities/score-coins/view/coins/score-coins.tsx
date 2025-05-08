@@ -26,7 +26,7 @@ export const ScoreCoins: FC<{
 					<div>
 						<img width={30} height={30} src={logo150} alt={'logo150'} />
 					</div>
-					<p>GeekCoin 150 - {coins.lotCoin150.length}</p>
+					<p>GeekCoin150 - {coins.lotCoin150.length}</p>
 					<p>{coins.lotCoin150.length * 150}</p>
 				</li>
 				<li>
@@ -64,7 +64,12 @@ export const ScoreCoins: FC<{
 				<div className={classes.info}>
 					<div className={classes.label}>
 						<div>
-							<img src={totalGeekCoins} alt='total coins' width={72} height={30} />
+							<img
+								src={totalGeekCoins}
+								alt='total coins'
+								width={72}
+								height={30}
+							/>
 						</div>
 						<p>{'GeekCoins'}</p>
 					</div>

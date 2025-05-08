@@ -1,6 +1,25 @@
-.board {
-	width: calc(86px * 8);
-	height: calc(86px * 8);
+.wrapper {
 	display: flex;
-	flex-wrap: wrap;
+	flex-direction: column;
+	gap: 24px;
+
+	.userName {
+		align-self: flex-start;
+		display: inline-block;
+		width: auto;
+		padding: 10px 6px;
+		text-align: center;
+		background-color: #212121;
+		border-radius: 4px;
+		color: #fff;
+		font-weight: 500;
+		line-height: 100%;
+	}
+
+	.board {
+		width: calc(86px * 8);
+		height: calc(86px * 8);
+		display: flex;
+		flex-wrap: wrap;
+	}
 }

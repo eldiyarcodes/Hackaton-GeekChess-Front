@@ -37,6 +37,10 @@ export class Coin {
 				break
 		}
 
-		this.cell.coin = this
+		if (cell) {
+			cell.coin = this
+		}
+
+		// this.cell.coin = this
 	}
 }

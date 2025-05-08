@@ -5,8 +5,6 @@ export const AppRoutes = {
 	NOT_FOUND: '*',
 } as const
 
-export type AppRoutes = (typeof AppRoutes)[keyof typeof AppRoutes]
-
 export const CoinNaminals = {
 	COIN150: 150,
 	COIN200: 200,
@@ -15,14 +13,10 @@ export const CoinNaminals = {
 	COIN350: 350,
 } as const
 
-export type CoinNaminals = (typeof CoinNaminals)[keyof typeof CoinNaminals]
-
 export const Colors = {
 	WHITE: 'white',
 	BLACK: 'black',
 } as const
-
-export type Colors = (typeof Colors)[keyof typeof Colors]
 
 export const FigureNames = {
 	FIGURE: 'Фигура',
@@ -34,4 +28,11 @@ export const FigureNames = {
 	BISHOP: 'Слон',
 } as const
 
+export const Tokens = {
+	ACCESS: 'token_auth',
+}
+
+export type AppRoutes = (typeof AppRoutes)[keyof typeof AppRoutes]
+export type CoinNaminals = (typeof CoinNaminals)[keyof typeof CoinNaminals]
+export type Colors = (typeof Colors)[keyof typeof Colors]
 export type FigureNames = (typeof FigureNames)[keyof typeof FigureNames]
