@@ -1,6 +1,6 @@
-import { CoinNaminals, Colors } from '../../../shared/consts/consts'
+import { Coin } from '../../../entities/coin/model/coin'
+import { CoinNaminals, Colors } from '../../../shared/utils/consts/consts'
 import { Cell } from '../../cell/model/cell'
-import { Coin } from '../../coin/model/coin'
 import { Knight } from '../../figures/model/knight'
 
 export class Board {
@@ -33,7 +33,6 @@ export class Board {
 			if (!cell) break
 
 			const coin = new Coin(cell, this.getRandomNaminal())
-			coin.naminal = this.getRandomNaminal()
 			cell.coin = coin
 		}
 	}
@@ -57,6 +56,7 @@ export class Board {
 	public getCopyBoard(): Board {
 		const newBoard = new Board()
 		newBoard.cells = this.cells
+
 		newBoard.lostCoint150 = this.lostCoint150
 		newBoard.lostCoint200 = this.lostCoint200
 		newBoard.lostCoint250 = this.lostCoint250
@@ -75,6 +75,52 @@ export class Board {
 				target.available = !!selectedCell?.figure?.canMove(target)
 			}
 		}
+	}
+
+	clearHighlights() {
+		this.cells.forEach(row =>
+			row.forEach(cell => {
+				cell.available = false
+			})
+		)
+	}
+
+	public moveFigure(from: Cell, to: Cell) {
+		if (from.figure && from.figure.canMove(to)) {
+			from.figure.moveFigure(to)
+
+			if (to.coin) {
+				switch (to.coin.naminal) {
+					case CoinNaminals.COIN150:
+						this.lostCoint150.push(to.coin.naminal)
+						break
+					case CoinNaminals.COIN200:
+						this.lostCoint200.push(to.coin.naminal)
+						break
+					case CoinNaminals.COIN250:
+						this.lostCoint250.push(to.coin.naminal)
+						break
+					case CoinNaminals.COIN300:
+						this.lostCoint300.push(to.coin.naminal)
+						break
+					case CoinNaminals.COIN350:
+						this.lostCoint350.push(to.coin.naminal)
+						break
+				}
+
+				to.coin = null
+			}
+		}
+	}
+
+	get totalScore(): number {
+		return (
+			this.lostCoint150.length * 150 +
+			this.lostCoint200.length * 200 +
+			this.lostCoint250.length * 250 +
+			this.lostCoint300.length * 300 +
+			this.lostCoint350.length * 350
+		)
 	}
 
 	public getCell(x: number, y: number) {

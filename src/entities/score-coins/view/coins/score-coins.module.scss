@@ -1,0 +1,51 @@
+.lost {
+	padding: 20px;
+	background-color: #393939;
+}
+
+.lostList {
+	width: 330px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	color: #ffffff;
+	padding-bottom: 30px;
+	border-bottom: 1px solid #666666;
+
+	li {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+}
+
+.total {
+	font-size: 30px;
+	padding-top: 30px;
+
+	h4 {
+		margin-bottom: 20px;
+		color: #ffffff;
+		font-weight: 500;
+		line-height: 100%;
+	}
+	.info {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-weight: 500;
+		line-height: 100%;
+
+		.label {
+			display: flex;
+			align-items: center;
+			gap: 11px;
+			color: #ffffff;
+		}
+
+		.value {
+			color: #f5d91f;
+		}
+	}
+}

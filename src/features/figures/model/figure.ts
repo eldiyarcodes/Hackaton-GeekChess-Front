@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 import knightLogo from '../../../shared/assets/white-knight.svg'
 
-import { FigureNames, type Colors } from '../../../shared/consts/consts'
+import { FigureNames, type Colors } from '../../../shared/utils/consts/consts'
 import type { Cell } from '../../cell/model/cell'
 
 export class Figure {

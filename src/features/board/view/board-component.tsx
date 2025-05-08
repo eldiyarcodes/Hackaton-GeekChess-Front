@@ -12,15 +12,26 @@ export const BoardComponent: FC<{
 	const [selectedCell, setSelectedCell] = useState<Cell | null>(null)
 
 	function onClick(cell: Cell) {
+		if (selectedCell === cell) {
+			setSelectedCell(null)
+			board.clearHighlights()
+			updateBoard()
+			return
+		}
+
 		if (
 			selectedCell &&
 			selectedCell !== cell &&
 			selectedCell.figure?.canMove(cell)
 		) {
-			selectedCell.figure?.moveFigure(cell)
+			board.moveFigure(selectedCell, cell)
 			setSelectedCell(null)
+			board.clearHighlights()
 			updateBoard()
-		} else {
+			return
+		}
+
+		if (cell.figure) {
 			setSelectedCell(cell)
 		}
 	}

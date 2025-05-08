@@ -23,10 +23,15 @@ export const CellComponent: FC<{
 				<img
 					src={cell.figure.logo}
 					alt={`${cell.figure.color}-${cell.figure.name}`}
+					className={classes.figure}
 				/>
 			)}
 			{cell.coin?.logo && (
-				<img src={cell.coin.logo} alt={`coin-${cell.coin.naminal}`} />
+				<img
+					src={cell.coin.logo}
+					alt={`coin-${cell.coin.naminal}`}
+					className={classes.coinLogo}
+				/>
 			)}
 		</div>
 	)

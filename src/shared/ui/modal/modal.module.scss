@@ -1,0 +1,52 @@
+.modalBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 9999;
+  padding: 16px;
+}
+
+.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modalContent {
+  background-color: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  .title {
+    margin-bottom: 24px;
+
+    @include flexbox(center, space-between);
+    @include breakpoint(mobile) {
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      @include breakpoint(mobile) {
+        font-size: 18px;
+      }
+    }
+
+    .icon {
+      cursor: pointer;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .modalContent {
+    .title {
+      margin-bottom: 20px;
+    }
+  }
+}

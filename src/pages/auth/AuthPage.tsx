@@ -1,18 +1,24 @@
 import { useEffect, useState, type FC } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Logo2 from '../../shared/assets/Logo2.png';
-import WhiteKnight from '../../shared/assets/WhiteKnight.svg';
+import WhiteKnight from '../../shared/assets/white-knight.svg';
 import styles from './auth.module.scss';
+import { useNavigate } from 'react-router-dom';
+import { AppRoutes } from '../../shared/utils/consts/consts';
 
 export const AuthPage: FC = () => {
   const [step, setStep] = useState(0);
+  const navigate = useNavigate();
 
+  const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    navigate(AppRoutes.GAME_ROOM);
+  };
   useEffect(() => {
     const timers = [setTimeout(() => setStep(1), 2000)];
 
     return () => timers.forEach(clearTimeout);
   }, []);
-
   return (
     <div
       className={`${styles.main} ${
@@ -46,12 +52,12 @@ export const AuthPage: FC = () => {
           </div>
           <div className={styles.registration}>
             <h3>Registration</h3>
-            <form>
+            <form onSubmit={(e) => handleClick(e)}>
               <label htmlFor='name'>Name:</label>
               <input id='name' type='text' placeholder='Name' />
               <label htmlFor='phoneNumber'>Phone number:</label>
               <input id='phoneNumber' type='tel' placeholder='Phone number' />
-              <input type='submit' value='Sign Up'/>
+              <input type='submit' value='Sign Up' />
             </form>
           </div>
         </div>
