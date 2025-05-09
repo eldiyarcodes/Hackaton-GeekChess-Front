@@ -8,7 +8,7 @@ import classes from './modal.module.scss'
 interface IModalProps {
 	isOpen: boolean
 	children?: ReactNode
-	title: string
+	title?: string
 	className?: string
 	onClick?: () => void
 }

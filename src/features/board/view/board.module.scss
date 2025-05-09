@@ -1,13 +1,13 @@
 .wrapper {
 	display: flex;
 	flex-direction: column;
-	gap: 24px;
+	gap: 15px;
 
 	.userName {
 		align-self: flex-start;
 		display: inline-block;
 		width: auto;
-		padding: 10px 6px;
+		padding: 10px 14px;
 		text-align: center;
 		background-color: #212121;
 		border-radius: 4px;
@@ -17,8 +17,8 @@
 	}
 
 	.board {
-		width: calc(86px * 8);
-		height: calc(86px * 8);
+		width: calc(60px * 8);
+		height: calc(60px * 8);
 		display: flex;
 		flex-wrap: wrap;
 	}

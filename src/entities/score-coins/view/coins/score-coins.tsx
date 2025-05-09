@@ -5,78 +5,58 @@ import logo250 from '../../../../shared/assets/images/geekcoin 250.svg'
 import logo300 from '../../../../shared/assets/images/geekcoin 300.svg'
 import logo350 from '../../../../shared/assets/images/geekcoin 350.svg'
 import totalGeekCoins from '../../../../shared/assets/images/total-coins.png'
-import type { CoinNaminals } from '../../../../shared/utils/consts/consts'
+import { ScoreItem } from '../../../../shared/ui'
+import type { IScoreCoins } from '../../../../shared/utils/types'
 import { Timer } from '../timer/timer'
 import classes from './score-coins.module.scss'
 
-export const ScoreCoins: FC<{
-	coins: {
-		lotCoin150: CoinNaminals[]
-		lotCoin200: CoinNaminals[]
-		lotCoin250: CoinNaminals[]
-		lotCoin300: CoinNaminals[]
-		lotCoin350: CoinNaminals[]
-		totalScore: number
-	}
-}> = ({ coins }) => {
+export const ScoreCoins: FC<{ coins: IScoreCoins }> = ({ coins }) => {
 	return (
 		<div className={classes.lost}>
 			<Timer />
-			<h3 style={{ marginBottom: 30, color: '#fff' }}>{'SCOREBOARD:'}</h3>
-			<ul className={classes.lostList}>
-				<li>
-					<div>
-						<img width={30} height={30} src={logo150} alt={'logo150'} />
-					</div>
-					<p>GeekCoin150 - {coins.lotCoin150.length}</p>
-					<p>{coins.lotCoin150.length * 150}</p>
-				</li>
-				<li>
-					<div>
-						<img width={30} height={30} src={logo200} alt={'logo200'} />
-					</div>
-					<p>GeekCoin200 - {coins.lotCoin200.length}</p>
-					<p>{coins.lotCoin200.length * 200}</p>
-				</li>
-				<li>
-					<div>
-						<img width={30} height={30} src={logo250} alt={'logo250'} />
-					</div>
-					<p>GeekCoin250 - {coins.lotCoin250.length}</p>
-					<p>{coins.lotCoin250.length * 250}</p>
-				</li>
-				<li>
-					<div>
-						<img width={30} height={30} src={logo300} alt={'logo300'} />
-					</div>
-					<p>GeekCoin300 - {coins.lotCoin300.length}</p>
-					<p>{coins.lotCoin300.length * 300}</p>
-				</li>
-				<li>
-					<div>
-						<img width={30} height={30} src={logo350} alt={'logo350'} />
-					</div>
-					<p>GeekCoin350 - {coins.lotCoin350.length}</p>
-					<p>{coins.lotCoin350.length * 350}</p>
-				</li>
-			</ul>
+			<h3 className={classes.title}>{'SCOREBOARD:'}</h3>
+			<div className={classes.lostList}>
+				<ScoreItem
+					variant='single'
+					nominal={150}
+					coins={coins.lotCoin150}
+					logo={logo150}
+				/>
+				<ScoreItem
+					variant='single'
+					nominal={200}
+					coins={coins.lotCoin200}
+					logo={logo200}
+				/>
+				<ScoreItem
+					variant='single'
+					nominal={250}
+					coins={coins.lotCoin250}
+					logo={logo250}
+				/>
+				<ScoreItem
+					variant='single'
+					nominal={300}
+					coins={coins.lotCoin300}
+					logo={logo300}
+				/>
+				<ScoreItem
+					variant='single'
+					nominal={350}
+					coins={coins.lotCoin350}
+					logo={logo350}
+				/>
+			</div>
 
 			<div className={classes.total}>
 				<h4>Total:</h4>
-				<div className={classes.info}>
-					<div className={classes.label}>
-						<div>
-							<img
-								src={totalGeekCoins}
-								alt='total coins'
-								width={72}
-								height={30}
-							/>
-						</div>
-						<p>{'GeekCoins'}</p>
-					</div>
-					<p className={classes.value}>{coins.totalScore}</p>
-				</div>
+				<ScoreItem 
+					variant='total'
+					logo={totalGeekCoins}
+					coins={coins.lotCoin350}
+					nominal={350}
+					totalScore={coins.totalScore}
+				/>
 			</div>
 		</div>
 	)

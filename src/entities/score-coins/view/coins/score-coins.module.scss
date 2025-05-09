@@ -1,51 +1,35 @@
 .lost {
 	padding: 20px;
 	background-color: #393939;
+	max-height: 480px;
+	border-radius: 4px;
+	margin-top: 50px;
+
+	.title {
+		color: #ffffff;
+		margin-bottom: 30px;
+	}
 }
 
 .lostList {
-	width: 330px;
+	width: 280px;
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
+	gap: 5px;
 	color: #ffffff;
-	padding-bottom: 30px;
+	padding-bottom: 20px;
 	border-bottom: 1px solid #666666;
-
-	li {
-		width: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
 }
 
 .total {
-	font-size: 30px;
+	font-size: 15px;
 	padding-top: 30px;
 
 	h4 {
-		margin-bottom: 20px;
+		font-size: 16px;
+		margin-bottom: 15px;
 		color: #ffffff;
 		font-weight: 500;
 		line-height: 100%;
-	}
-	.info {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		font-weight: 500;
-		line-height: 100%;
-
-		.label {
-			display: flex;
-			align-items: center;
-			gap: 11px;
-			color: #ffffff;
-		}
-
-		.value {
-			color: #f5d91f;
-		}
 	}
 }

@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState, type FC } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../features/auth/model/use-auth'
 import Logo2 from '../../shared/assets/images/geeks 2.png'
 import WhiteKnight from '../../shared/assets/images/white-knight.svg'
 import { AppRoutes } from '../../shared/utils/consts/consts'
@@ -8,17 +9,25 @@ import styles from './auth-page.module.scss'
 
 export const AuthPage: FC = () => {
 	const [step, setStep] = useState(0)
+	const [name, setName] = useState('')
+	const [phone, setPhone] = useState('')
+
 	const navigate = useNavigate()
+	const signUp = useAuth(s => s.signUp)
 
 	const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
-		navigate(AppRoutes.GAME_ROOM)
+		signUp('Eldiyar Test', 'pass123', () =>
+			navigate(AppRoutes.INTRO, { replace: true })
+		)
 	}
+
 	useEffect(() => {
 		const timers = [setTimeout(() => setStep(1), 2000)]
 
 		return () => timers.forEach(clearTimeout)
 	}, [])
+
 	return (
 		<div
 			className={`${styles.main} ${
@@ -54,10 +63,24 @@ export const AuthPage: FC = () => {
 						<h3>Registration</h3>
 						<form onSubmit={e => handleClick(e)}>
 							<label htmlFor='name'>Name:</label>
-							<input id='name' type='text' placeholder='Name' />
+							<input
+								id='name'
+								type='text'
+								required
+								placeholder='Name'
+								value={name}
+								onChange={e => setName(e.target.value)}
+							/>
 							<label htmlFor='phoneNumber'>Phone number:</label>
-							<input id='phoneNumber' type='tel' placeholder='Phone number' />
-							<input type='submit' value='Sign Up' />
+							<input
+								id='phoneNumber'
+								type='tel'
+								required
+								placeholder='Phone number'
+								value={phone}
+								onChange={e => setPhone(e.target.value)}
+							/>
+							<button type='submit'>Sign Up</button>
 						</form>
 					</div>
 				</div>
