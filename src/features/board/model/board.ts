@@ -1,9 +1,11 @@
 import { Coin } from '../../../entities/coin/model/coin'
+import { playSound } from '../../../shared/utils/audio/sound'
 import { CoinNaminals, Colors } from '../../../shared/utils/consts/consts'
 import { Cell } from '../../cell/model/cell'
 import { Knight } from '../../figures/model/knight'
 
 export class Board {
+	private coinLevel = 1
 	cells: Cell[][] = []
 	lostCoint150: CoinNaminals[] = []
 	lostCoint200: CoinNaminals[] = []
@@ -25,10 +27,39 @@ export class Board {
 	}
 
 	private getRandomNaminal(): CoinNaminals {
-		const naminals = Object.values(CoinNaminals)
-		const randomIndex = Math.floor(Math.random() * naminals.length)
+		const random = Math.random() * 100
+		let result: CoinNaminals
 
-		return naminals[randomIndex]
+		if (this.coinLevel >= 5) {
+			if (random < 40) result = CoinNaminals.COIN250
+			else if (random < 75) result = CoinNaminals.COIN300
+			else result = CoinNaminals.COIN350
+		} else if (this.coinLevel >= 4) {
+			if (random < 15) result = CoinNaminals.COIN150
+			else if (random < 35) result = CoinNaminals.COIN200
+			else if (random < 60) result = CoinNaminals.COIN250
+			else if (random < 85) result = CoinNaminals.COIN300
+			else result = CoinNaminals.COIN350
+		} else if (this.coinLevel >= 3) {
+			if (random < 25) result = CoinNaminals.COIN150
+			else if (random < 45) result = CoinNaminals.COIN200
+			else if (random < 70) result = CoinNaminals.COIN250
+			else if (random < 90) result = CoinNaminals.COIN300
+			else result = CoinNaminals.COIN350
+		} else if (this.coinLevel >= 2) {
+			if (random < 40) result = CoinNaminals.COIN150
+			else if (random < 65) result = CoinNaminals.COIN200
+			else if (random < 85) result = CoinNaminals.COIN250
+			else result = CoinNaminals.COIN300
+		} else if (this.coinLevel >= 1) {
+			if (random < 60) result = CoinNaminals.COIN150
+			else if (random < 85) result = CoinNaminals.COIN200
+			else result = CoinNaminals.COIN250
+		} else {
+			result = CoinNaminals.COIN150
+		}
+
+		return result
 	}
 
 	public addCoins(count = 10) {
@@ -55,6 +86,14 @@ export class Board {
 
 			this.cells.push(row)
 		}
+	}
+
+	public setCoinLevel(level: number) {
+		this.coinLevel = Math.min(level, 5)
+	}
+
+	public getCoinLevel(): number {
+		return this.coinLevel
 	}
 
 	public getCopyBoard(): Board {
@@ -95,6 +134,8 @@ export class Board {
 
 			from.figure.moveFigure(to)
 			from.figure = null
+
+			playSound(hadCoin ? 'capture' : 'move')
 
 			if (hadCoin) {
 				const newCell = this.getRandomEmptyCell()

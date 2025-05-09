@@ -1,15 +1,19 @@
 import { useEffect, useState, type FC } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { BoardComponent } from '../../features/board'
 import { Board } from '../../features/board/model/board'
 import Logo2 from '../../shared/assets/images/geeks 2.png'
 import Logo from '../../shared/assets/images/Logo.svg'
+import { useGame } from '../../shared/hooks/use-game'
 import { Modal } from '../../shared/ui/modal/modal'
 import { AppRoutes } from '../../shared/utils/consts/consts'
 import styles from './intro-page.module.scss'
 
 export const IntroPage: FC = () => {
 	const [board, setBoard] = useState(new Board())
+	const setIsGameOver = useGame(s => s.setIsGameOver)
+	const navigate = useNavigate()
+
 	useEffect(() => {
 		restart()
 	}, [])
@@ -20,11 +24,12 @@ export const IntroPage: FC = () => {
 		newBoard.addFigures()
 		setBoard(newBoard)
 	}
+
 	return (
 		<>
 			<div className={styles.container}>
 				<div className={styles.imgContainer}>
-					<img src={Logo2} />
+					<img src={Logo2} alt='geeks logo' />
 				</div>
 				<div className={styles.room}>
 					<BoardComponent board={board} setBoard={setBoard} />
@@ -51,9 +56,16 @@ export const IntroPage: FC = () => {
 							<li>4. Только допустимые ходы коня (буквой “Г”)</li>
 						</ul>
 					</div>
-					<Link className={styles.startButton} to={AppRoutes.GAME_ROOM}>
+					<button
+						type='button'
+						onClick={() => {
+							setIsGameOver(false)
+							navigate(AppRoutes.GAME_ROOM)
+						}}
+						className={styles.startButton}
+					>
 						Start the game
-					</Link>
+					</button>
 				</Modal>
 			</div>
 		</>

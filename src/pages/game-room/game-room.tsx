@@ -5,16 +5,28 @@ import { Board } from '../../features/board/model/board'
 import { useGame } from '../../shared/hooks/use-game'
 import { Modal } from '../../shared/ui'
 import { LeaderBoard } from '../../widgets/leader-board'
-import classes from './game-room.module.scss'
 import { ResultInfo } from '../../widgets/result'
+import classes from './game-room.module.scss'
 
 export const GameRoom: FC = () => {
 	const [board, setBoard] = useState(new Board())
 	const isGameOver = useGame(state => state.isGameOver)
 
-
 	useEffect(() => {
 		restart()
+	}, [])
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setBoard(prev => {
+				const newLevel = prev.getCoinLevel() + 1
+				prev.setCoinLevel(newLevel)
+
+				return Object.assign(new Board(), prev)
+			})
+		}, 10000)
+
+		return () => clearInterval(interval)
 	}, [])
 
 	function restart() {

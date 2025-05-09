@@ -32,7 +32,7 @@ export const Tokens = {
 	ACCESS: 'token_auth',
 }
 
-export const GAME_TIMER = 20
+export const GAME_TIMER = 60
 
 export type AppRoutes = (typeof AppRoutes)[keyof typeof AppRoutes]
 export type CoinNaminals = (typeof CoinNaminals)[keyof typeof CoinNaminals]
