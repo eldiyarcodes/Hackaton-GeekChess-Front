@@ -11,7 +11,7 @@ export class Cell {
 	figure: Figure | null
 	coin: Coin | null
 	board: Board
-	id: string // for react keys
+	id: string
 	available: boolean // can you move
 
 	constructor(

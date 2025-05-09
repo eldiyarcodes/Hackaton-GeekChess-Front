@@ -91,30 +91,12 @@ export class Board {
 
 	public moveFigure(from: Cell, to: Cell) {
 		if (from.figure && from.figure.canMove(to)) {
+			const hadCoin = !!to.coin
+
 			from.figure.moveFigure(to)
 			from.figure = null
 
-			if (to.coin) {
-				switch (to.coin.naminal) {
-					case CoinNaminals.COIN150:
-						this.lostCoint150.push(to.coin.naminal)
-						break
-					case CoinNaminals.COIN200:
-						this.lostCoint200.push(to.coin.naminal)
-						break
-					case CoinNaminals.COIN250:
-						this.lostCoint250.push(to.coin.naminal)
-						break
-					case CoinNaminals.COIN300:
-						this.lostCoint300.push(to.coin.naminal)
-						break
-					case CoinNaminals.COIN350:
-						this.lostCoint350.push(to.coin.naminal)
-						break
-				}
-
-				to.coin = null
-
+			if (hadCoin) {
 				const newCell = this.getRandomEmptyCell()
 				if (newCell) {
 					const newCoin = new Coin(newCell, this.getRandomNaminal())

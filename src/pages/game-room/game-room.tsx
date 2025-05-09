@@ -1,12 +1,18 @@
 import { useEffect, useState, type FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ScoreCoins } from '../../entities/score-coins'
 import { BoardComponent } from '../../features/board'
 import { Board } from '../../features/board/model/board'
-import { LeaderBoard } from '../../features/leader-board'
+import { LeaderBoard } from '../../widgets/leader-board'
+import { useGame } from '../../shared/hooks/use-game'
+import { Modal } from '../../shared/ui/modal/modal'
 import classes from './game-room.module.scss'
 
 export const GameRoom: FC = () => {
 	const [board, setBoard] = useState(new Board())
+	const isGameOver = useGame(state => state.isGameOver)
+
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		restart()
@@ -36,6 +42,7 @@ export const GameRoom: FC = () => {
 				<BoardComponent board={board} setBoard={setBoard} />
 				<ScoreCoins coins={scoreBoardCoins} />
 			</div>
+			<Modal isOpen={isGameOver} title={'Result'}></Modal>
 		</div>
 	)
 }

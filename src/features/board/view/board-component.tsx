@@ -11,7 +11,7 @@ export const BoardComponent: FC<{
 }> = ({ board, setBoard }) => {
 	const [selectedCell, setSelectedCell] = useState<Cell | null>(null)
 
-	function onClick(cell: Cell) {
+	const onClick = (cell: Cell) => {
 		if (selectedCell === cell) {
 			setSelectedCell(null)
 			board.clearHighlights()

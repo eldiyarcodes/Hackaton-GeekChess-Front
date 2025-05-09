@@ -2,31 +2,28 @@ import clsx from 'clsx'
 import { motion } from 'framer-motion'
 import type { FC, ReactNode } from 'react'
 import { createPortal } from 'react-dom'
-import { CloseIcon } from '../../assets/icons/close-icon'
 import { useDisableScroll } from '../../hooks/use-disable-scroll'
 import classes from './modal.module.scss'
 
 interface IModalProps {
 	isOpen: boolean
-	onClose: () => void
 	children?: ReactNode
 	title: string
-	closebtn?: boolean
 	className?: string
 	onClick?: () => void
 }
 
 export const Modal: FC<IModalProps> = ({
 	isOpen,
-	onClose,
 	children,
 	title,
-	closebtn,
 	className,
 }) => {
 	useDisableScroll(isOpen)
 
-	if (!isOpen) return null
+	if (!isOpen) {
+		return null
+	}
 
 	return createPortal(
 		<motion.div
@@ -49,11 +46,6 @@ export const Modal: FC<IModalProps> = ({
 				{title && (
 					<div className={classes.title}>
 						<p>{title}</p>
-						{closebtn && (
-							<div className={classes.icon} onClick={onClose}>
-								<CloseIcon />
-							</div>
-						)}
 					</div>
 				)}
 				{children}

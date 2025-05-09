@@ -6,6 +6,7 @@ import logo300 from '../../../../shared/assets/images/geekcoin 300.svg'
 import logo350 from '../../../../shared/assets/images/geekcoin 350.svg'
 import totalGeekCoins from '../../../../shared/assets/images/total-coins.png'
 import type { CoinNaminals } from '../../../../shared/utils/consts/consts'
+import { Timer } from '../timer/timer'
 import classes from './score-coins.module.scss'
 
 export const ScoreCoins: FC<{
@@ -20,6 +21,7 @@ export const ScoreCoins: FC<{
 }> = ({ coins }) => {
 	return (
 		<div className={classes.lost}>
+			<Timer />
 			<h3 style={{ marginBottom: 30, color: '#fff' }}>{'SCOREBOARD:'}</h3>
 			<ul className={classes.lostList}>
 				<li>

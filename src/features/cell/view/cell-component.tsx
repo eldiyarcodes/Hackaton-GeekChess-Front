@@ -9,7 +9,6 @@ export const CellComponent: FC<{
 	onClick: (cell: Cell) => void
 }> = ({ cell, selected, onClick }) => {
 	console.log('Figure: ', cell.figure)
-	console.log('Coin: ', cell.coin)
 
 	return (
 		<div
