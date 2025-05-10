@@ -32,6 +32,13 @@
     width: 100%;
     margin-bottom: 30px;
 
+    .spinner {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 30px 0;
+    }
+
     .list {
       width: 100%;
       display: flex;
@@ -134,6 +141,6 @@
   }
 }
 
-.itsMe{
-  color:#f5d91f;
+.itsMe {
+  color: #f5d91f;
 }

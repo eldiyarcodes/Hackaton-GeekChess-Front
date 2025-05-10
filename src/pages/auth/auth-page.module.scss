@@ -14,7 +14,7 @@
 
 .imageBackground {
   background-image: url('../../shared/assets/images/Geeks_pattern_grey1.png');
-	background-size: cover;
+  background-size: cover;
   // background-repeat: no-repeat;
   // background-size: cover;
 }
@@ -56,9 +56,9 @@
 
 .imageWithName {
   position: relative;
-	width: 450px;
+  width: 450px;
   top: 320px;
-	left: 177px;
+  left: 177px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -89,8 +89,8 @@
   @media screen and (max-width: 414px) {
     top: 510px;
     width: 231px;
-		left: 0;
-		margin: 0 auto;
+    left: 0;
+    margin: 0 auto;
     .KnightContainer {
       width: 100px;
       height: 120px;
@@ -140,6 +140,13 @@
       height: 44px;
       color: black;
       font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #f0b700;
+      }
     }
     label {
       margin-bottom: 8px;
@@ -161,9 +168,9 @@
     }
   }
   @media screen and (max-width: 414px) {
-		margin: 0 auto;
+    margin: 0 auto;
     width: 90vw;
-		left: 0;
+    left: 0;
     height: 380px;
     top: -65px;
     form {

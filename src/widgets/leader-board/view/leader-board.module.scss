@@ -69,6 +69,13 @@
     height: 37px;
   }
 }
-.itsMe{
-	color:#f5d91f;
+.itsMe {
+  color: #f5d91f;
+}
+
+.spinner {
+  width: 100%;
+  padding: 30px 0;
+  display: flex;
+  justify-content: center;
 }

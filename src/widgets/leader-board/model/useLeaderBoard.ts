@@ -1,20 +1,24 @@
-import { create } from "zustand";
-import { requester } from "../../../shared/api/axios";
-import type { LeaderBoardDto } from "../../../shared/utils/types";
+import { create } from 'zustand';
+import { requester } from '../../../shared/api/axios';
+import type { LeaderBoardDto } from '../../../shared/utils/types';
 
 interface State {
- data: LeaderBoardDto[],
- fetchData: () => void
+  data: LeaderBoardDto[];
+  fetchData: () => void;
+  isLoading: boolean;
 }
 export const useLeaderBoard = create<State>((set) => ({
   data: [] as LeaderBoardDto[],
-  fetchData: async() => {
-    try{
-      const {data} = await requester.get('score/top-players');
-      console.log('My data ' + data);
-      set({data: data.data})
-    }catch(e){
+  isLoading: false,
+  fetchData: async () => {
+    try {
+      set({ isLoading: true });
+      const { data } = await requester.get('score/top-players');
+      set({ data: data.data });
+    } catch (e) {
       return Promise.reject(e);
+    } finally {
+      set({ isLoading: false });
     }
-  }
-}))
+  },
+}));
