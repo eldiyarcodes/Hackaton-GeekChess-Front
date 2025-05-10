@@ -1,25 +1,38 @@
 .wrapper {
-	display: flex;
-	flex-direction: column;
-	gap: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  .userName {
+    align-self: flex-start;
+    display: inline-block;
+    width: auto;
+    padding: 10px 14px;
+    text-align: center;
+    background-color: #212121;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 500;
+    line-height: 100%;
+  }
 
-	.userName {
-		align-self: flex-start;
-		display: inline-block;
-		width: auto;
-		padding: 10px 14px;
-		text-align: center;
-		background-color: #212121;
-		border-radius: 4px;
-		color: #fff;
-		font-weight: 500;
-		line-height: 100%;
-	}
-
-	.board {
-		width: calc(60px * 8);
-		height: calc(60px * 8);
-		display: flex;
-		flex-wrap: wrap;
-	}
+  .board {
+    width: calc(60px * 8);
+    height: calc(60px * 8);
+    display: flex;
+    flex-wrap: wrap;
+    @media screen and (max-width: 414px) {
+      width: calc(44px * 8);
+      height: calc(44px * 8);
+    }
+  }
+  @media screen and (max-width: 414px) {
+    position: relative;
+    top: -5px;
+    .userName {
+      font-size: 16px;
+      margin-left: 10px;
+    }
+  }
 }

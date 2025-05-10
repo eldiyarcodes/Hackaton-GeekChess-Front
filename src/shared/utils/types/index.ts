@@ -4,6 +4,7 @@ export interface LeaderBoardDto {
 	_id: string
 	login: string
 	score: number
+	telephone: string
 }
 
 export interface IScoreCoins {

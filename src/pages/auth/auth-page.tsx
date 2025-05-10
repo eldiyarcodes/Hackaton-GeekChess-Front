@@ -1,53 +1,79 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { useEffect, useState, type FC } from 'react'
+import { useReducer, useRef, useState, type FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../features/auth/model/use-auth'
 import Logo2 from '../../shared/assets/images/geeks 2.png'
 import WhiteKnight from '../../shared/assets/images/white-knight.svg'
 import { AppRoutes } from '../../shared/utils/consts/consts'
 import styles from './auth-page.module.scss'
+import { MultiContainer } from '../../shared/ui/multi-container/MultiContainer'
+import { useMediaQuery } from '../../shared/hooks/use-media-query'
+import { useUser, type PlayerDto } from '../../features/auth/model/use-user'
 
 export const AuthPage: FC = () => {
-	const [step, setStep] = useState(0)
-	const [name, setName] = useState('')
-	const [phone, setPhone] = useState('')
+	const [name, setName] = useState('');
+	const isMobile = useMediaQuery('(max-width: 414px)');
+	const [phone, setPhone] = useState('');
+	const [errors, setErrors] = useState({ name: '', phone: '' });
+	const ref = useRef(0);
+	const hasRun = useRef(false);
+	const [, forceUpdate] = useReducer((x) => x + 1, 0);
+	const navigate = useNavigate();
+	const signUp = useAuth(s => s.signUp);
+	const {setPlayer} = useUser();
 
-	const navigate = useNavigate()
-	const signUp = useAuth(s => s.signUp)
+	const validatePhone = (phone: string) => {
+		const kyrgyzPattern = /^\+996\d{9}$/;
+		return kyrgyzPattern.test(phone);
+	};
 
 	const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault()
-		signUp('Eldiyar Test', 'pass123', () =>
-			navigate(AppRoutes.INTRO, { replace: true })
-		)
+		e.preventDefault();
+		let isValidate = false;
+		const newErrors = { name: '', phone: '' };
+		if (!name.trim()) {
+			newErrors.name = 'Имя обязательно';
+			isValidate = true;
+		}
+		if (!validatePhone(phone)) {
+			newErrors.phone = 'Введите номер в формате +996XXXXXXXXX';
+			isValidate = true;
+		}
+		setErrors(newErrors);
+
+		if(!isValidate){
+			signUp( name, phone, () =>
+			navigate(AppRoutes.INTRO, { replace: true }), (data) => setPlayer(data ?? {} as PlayerDto))
+		}
 	}
-
-	useEffect(() => {
-		const timers = [setTimeout(() => setStep(1), 2000)]
-
-		return () => timers.forEach(clearTimeout)
-	}, [])
-
+	if (!hasRun.current) {
+  hasRun.current = true;
+  setTimeout(() => {
+    ref.current += 1;
+    forceUpdate(); 
+  }, 1500);
+}
 	return (
 		<div
 			className={`${styles.main} ${
-				step < 1 ? styles.blackBackground : styles.imageBackground
+				ref.current < 1 ? styles.blackBackground : styles.imageBackground
 			}`}
 		>
 			<AnimatePresence mode='wait'>
-				{step < 1 && (
+				{ref.current < 1 && (
 					<motion.div
 						key='text'
 						initial={{ opacity: 0, x: -100 }}
 						animate={{ opacity: 1, x: 0 }}
 						transition={{ duration: 2 }}
+						className={isMobile ? styles.mobileIntro : ''}
 					>
 						<img src={Logo2} alt='logo' />
 					</motion.div>
 				)}
 			</AnimatePresence>
-			{step >= 1 && (
-				<div className={styles.auth}>
+			{ref.current >= 1 && (
+				<MultiContainer className={styles.auth}>
 					<div className={styles.imageContainer}>
 						<img src={Logo2} alt='logo 2' />
 					</div>
@@ -59,9 +85,9 @@ export const AuthPage: FC = () => {
 							<h2>Knight Dash</h2>
 						</div>
 					</div>
-					<div className={styles.registration}>
+					<div className={(styles.registration)}>
 						<h3>Registration</h3>
-						<form onSubmit={e => handleClick(e)}>
+						<form onSubmit={e => handleClick(e)} noValidate>
 							<label htmlFor='name'>Name:</label>
 							<input
 								id='name'
@@ -71,19 +97,22 @@ export const AuthPage: FC = () => {
 								value={name}
 								onChange={e => setName(e.target.value)}
 							/>
+							{errors.name && <div className={styles.inputError}>{errors.name}</div>}
 							<label htmlFor='phoneNumber'>Phone number:</label>
 							<input
 								id='phoneNumber'
 								type='tel'
 								required
-								placeholder='Phone number'
+								placeholder='+996XXXXXXXXX'
+								maxLength={13}
 								value={phone}
 								onChange={e => setPhone(e.target.value)}
 							/>
+							{errors.phone && <div className={styles.inputError}>{errors.phone}</div>}
 							<button type='submit'>Sign Up</button>
 						</form>
 					</div>
-				</div>
+				</MultiContainer>
 			)}
 		</div>
 	)

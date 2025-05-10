@@ -4,12 +4,14 @@ import { CellComponent } from '../../cell'
 import type { Cell } from '../../cell/model/cell'
 import { Board } from '../model/board'
 import classes from './board.module.scss'
+import { useUser } from '../../auth/model/use-user'
 
 export const BoardComponent: FC<{
 	board: Board
 	setBoard: (board: Board) => void
 }> = ({ board, setBoard }) => {
 	const [selectedCell, setSelectedCell] = useState<Cell | null>(null)
+	const {player} = useUser();
 
 	const onClick = (cell: Cell) => {
 		if (selectedCell === cell) {
@@ -52,7 +54,7 @@ export const BoardComponent: FC<{
 
 	return (
 		<div className={classes.wrapper}>
-			<div className={classes.userName}>{'Geeks Baike'}</div>
+			<div className={classes.userName}>{player?.login || 'Username'}</div>
 			<div className={classes.board}>
 				{board.cells.map((row, idx) => (
 					<React.Fragment key={idx}>

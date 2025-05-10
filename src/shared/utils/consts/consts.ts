@@ -5,6 +5,8 @@ export const AppRoutes = {
 	NOT_FOUND: '*',
 } as const
 
+export const baseURL = import.meta.env.VITE_API_URL;
+
 export const CoinNaminals = {
 	COIN150: 150,
 	COIN200: 200,
@@ -31,10 +33,20 @@ export const FigureNames = {
 export const Tokens = {
 	ACCESS: 'token_auth',
 }
+export const CurrentPlayer = 'CURRENT_PLAYER';
 
-export const GAME_TIMER = 60
+
+export const GAME_TIMER = 10
 
 export type AppRoutes = (typeof AppRoutes)[keyof typeof AppRoutes]
 export type CoinNaminals = (typeof CoinNaminals)[keyof typeof CoinNaminals]
 export type Colors = (typeof Colors)[keyof typeof Colors]
 export type FigureNames = (typeof FigureNames)[keyof typeof FigureNames]
+
+
+export const rules = [
+	{id: 1, text: 'Игрок управляет только конем'},
+	{id: 2, text: 'На поле появляются GeekCoin'},
+	{id: 3, text: 'Задача: Собрать как можно больше GeekCoin за ограниченное число времени'},
+	{id: 4, text: 'Только допустимые ходы коня (буквой “Г”)'}
+]
