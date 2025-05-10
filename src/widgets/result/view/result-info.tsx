@@ -76,7 +76,7 @@ export const ResultInfo: FC<{ coins: IScoreCoins }> = ({ coins }) => {
       </div>
 
       <div className={classes.leaders}>
-        <p className={classes.title}>leaderboard:</p>\{' '}
+        <p className={classes.title}>leaderboard:</p>{' '}
         {isLoading ? (
           <div className={classes.spinner}>
 						<Spin />
