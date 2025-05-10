@@ -1,61 +1,91 @@
-import { useEffect, useState, type FC } from 'react'
-import { ScoreCoins } from '../../entities/score-coins'
-import { BoardComponent } from '../../features/board'
-import { Board } from '../../features/board/model/board'
-import { useGame } from '../../shared/hooks/use-game'
-import { Modal } from '../../shared/ui'
-import { LeaderBoard } from '../../widgets/leader-board'
-import { ResultInfo } from '../../widgets/result'
-import classes from './game-room.module.scss'
+import { useEffect, useState, type FC } from 'react';
+import { ScoreCoins } from '../../entities/score-coins';
+import { BoardComponent } from '../../features/board';
+import { Board } from '../../features/board/model/board';
+import { useGame } from '../../shared/hooks/use-game';
+import logo from '../../shared/assets/images/geeks 2.png';
+import { Modal } from '../../shared/ui';
+import { LeaderBoard } from '../../widgets/leader-board';
+import classes from './game-room.module.scss';
+import { ResultInfo } from '../../widgets/result';
+import { useMediaQuery } from '../../shared/hooks/use-media-query';
+import { MultiContainer } from '../../shared/ui/multi-container/MultiContainer';
+import { TabBar } from '../../shared/ui/tab-bar/TabBar';
+import { Timer } from '../../entities/score-coins/view/timer/timer';
 
 export const GameRoom: FC = () => {
-	const [board, setBoard] = useState(new Board())
-	const isGameOver = useGame(state => state.isGameOver)
+  const [board, setBoard] = useState(new Board());
+  const isMobile = useMediaQuery('(max-width: 414px)');
+  const isGameOver = useGame((state) => state.isGameOver);
 
-	useEffect(() => {
-		restart()
-	}, [])
+  useEffect(() => {
+    restart();
+  }, []);
 
-	useEffect(() => {
-		const interval = setInterval(() => {
-			setBoard(prev => {
-				const newLevel = prev.getCoinLevel() + 1
-				prev.setCoinLevel(newLevel)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBoard((prev) => {
+        const newLevel = prev.getCoinLevel() + 1;
+        prev.setCoinLevel(newLevel);
 
-				return Object.assign(new Board(), prev)
-			})
-		}, 10000)
+        return Object.assign(new Board(), prev);
+      });
+    }, 10000);
 
-		return () => clearInterval(interval)
-	}, [])
+    return () => clearInterval(interval);
+  }, []);
 
-	function restart() {
-		const newBoard = new Board()
-		newBoard.initCells()
-		newBoard.addFigures()
-		newBoard.addCoins(5)
-		setBoard(newBoard)
-	}
+  function restart() {
+    const newBoard = new Board();
+    newBoard.initCells();
+    newBoard.addFigures();
+    newBoard.addCoins(5);
+    setBoard(newBoard);
+  }
 
-	const scoreBoardCoins = {
-		lotCoin150: board.lostCoint150,
-		lotCoin200: board.lostCoint200,
-		lotCoin250: board.lostCoint250,
-		lotCoin300: board.lostCoint300,
-		lotCoin350: board.lostCoint350,
-		totalScore: board.totalScore,
-	}
-
-	return (
-		<div className={classes.room}>
-			<div className={classes.container}>
-				<LeaderBoard />
-				<BoardComponent board={board} setBoard={setBoard} />
-				<ScoreCoins coins={scoreBoardCoins} />
-			</div>
-			<Modal isOpen={isGameOver}>
-				<ResultInfo coins={scoreBoardCoins} />
-			</Modal>
-		</div>
-	)
-}
+  const scoreBoardCoins = {
+    lotCoin150: board.lostCoint150,
+    lotCoin200: board.lostCoint200,
+    lotCoin250: board.lostCoint250,
+    lotCoin300: board.lostCoint300,
+    lotCoin350: board.lostCoint350,
+    totalScore: board.totalScore,
+  };
+  const tabs = [
+    { label: 'LEADERBOARD:', content: <LeaderBoard /> },
+    {
+      label: 'SCOREBOARD:',
+      content: <ScoreCoins coins={scoreBoardCoins} />,
+    },
+  ];
+  return (
+    <div className={classes.room}>
+      <MultiContainer className={classes.container}>
+        {isMobile ? (
+          <>
+            <div className={classes.imgContainer}>
+              <img src={logo} alt='geeks logo' className={classes.logo} />
+            </div>
+            <Timer />
+            <BoardComponent board={board} setBoard={setBoard} />
+            <TabBar className={classes.tabBar} defaultActive={0} tabs={tabs} />
+          </>
+        ) : (
+          <>
+            <div className={classes.imgContainer}>
+              <img src={logo} alt='geeks logo' className={classes.logo} />
+            </div>
+            <div className={classes.evenBoard}>
+              <LeaderBoard />
+              <div className={classes.board}><BoardComponent board={board} setBoard={setBoard} /></div>
+              <ScoreCoins coins={scoreBoardCoins} />
+            </div>
+          </>
+        )}
+      </MultiContainer>
+      <Modal isOpen={isGameOver}>
+        <ResultInfo coins={scoreBoardCoins} />
+      </Modal>
+    </div>
+  );
+};

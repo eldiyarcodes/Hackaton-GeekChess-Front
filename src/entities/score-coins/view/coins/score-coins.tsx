@@ -9,11 +9,13 @@ import { ScoreItem } from '../../../../shared/ui'
 import type { IScoreCoins } from '../../../../shared/utils/types'
 import { Timer } from '../timer/timer'
 import classes from './score-coins.module.scss'
+import { useMediaQuery } from '../../../../shared/hooks/use-media-query'
 
 export const ScoreCoins: FC<{ coins: IScoreCoins }> = ({ coins }) => {
+	const isDesktop = useMediaQuery('(min-width: 414px)');
 	return (
 		<div className={classes.lost}>
-			<Timer />
+			{isDesktop && (<Timer />)}
 			<h3 className={classes.title}>{'SCOREBOARD:'}</h3>
 			<div className={classes.lostList}>
 				<ScoreItem

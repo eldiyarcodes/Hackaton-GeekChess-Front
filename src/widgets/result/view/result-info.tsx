@@ -1,5 +1,4 @@
-import { nanoid } from 'nanoid'
-import type { FC } from 'react'
+import { useEffect, type FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../features/auth/model/use-auth'
 import logo150 from '../../../shared/assets/images/geekcoin 150.svg'
@@ -10,19 +9,26 @@ import logo350 from '../../../shared/assets/images/geekcoin 350.svg'
 import totalGeekCoins from '../../../shared/assets/images/total-coins.png'
 import { ScoreItem } from '../../../shared/ui'
 import { AppRoutes } from '../../../shared/utils/consts/consts'
-import type { IScoreCoins, LeaderBoardDto } from '../../../shared/utils/types'
+import type { IScoreCoins } from '../../../shared/utils/types'
 import classes from './result-info.module.scss'
+import { useSendScore } from '../model/useSendScore'
+import { useUser } from '../../../features/auth/model/use-user'
+import clsx from 'clsx'
 
-const players: LeaderBoardDto[] = [
-	{ _id: nanoid(), login: 'Geeks Baike', score: 1000 },
-	{ _id: nanoid(), login: 'Monica Belucci', score: 900 },
-	{ _id: nanoid(), login: 'Leonardo DiCaprio', score: 850 },
-]
 
 export const ResultInfo: FC<{ coins: IScoreCoins }> = ({ coins }) => {
 	const navigate = useNavigate()
 	const logout = useAuth(s => s.logout)
-
+	const {data, fetchScore, isLoading} = useSendScore();
+	const {clearPlayer, player} = useUser();
+	useEffect(() => {
+		if(player?._id){
+			fetchScore(player._id, coins.totalScore);
+		}
+	}, [])
+	if(isLoading){
+		return <div>Loading ...</div>
+	}
 	return (
 		<div className={classes.result}>
 			<h3>Results</h3>
@@ -72,11 +78,11 @@ export const ResultInfo: FC<{ coins: IScoreCoins }> = ({ coins }) => {
 
 			<div className={classes.leaders}>
 				<p className={classes.title}>leaderboard:</p>
-				<ul className={classes.list}>
-					{players.map((user, idx) => (
+\				<ul className={classes.list}>
+					{data?.slice(0,3).map((user,idx)  => (
 						<li key={user._id} className={classes.player}>
 							<p className={classes.login}>
-								{idx + 1}. {user.login}
+								{idx + 1}. <span className={clsx(user._id === player?._id && classes.itsMe)}>{user.login}</span>
 							</p>
 							<p className={classes.score}>{user.score}</p>
 						</li>
@@ -92,7 +98,7 @@ export const ResultInfo: FC<{ coins: IScoreCoins }> = ({ coins }) => {
 				>
 					Restart
 				</button>
-				<button onClick={() => logout()} type='button' className={classes.quit}>
+				<button onClick={() => logout(()=> navigate(AppRoutes.HOME),() => clearPlayer() )} type='button' className={classes.quit}>
 					Quit
 				</button>
 			</div>

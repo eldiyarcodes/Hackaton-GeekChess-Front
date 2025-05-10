@@ -6,8 +6,9 @@ import Logo2 from '../../shared/assets/images/geeks 2.png'
 import Logo from '../../shared/assets/images/Logo.svg'
 import { useGame } from '../../shared/hooks/use-game'
 import { Modal } from '../../shared/ui/modal/modal'
-import { AppRoutes } from '../../shared/utils/consts/consts'
+import { AppRoutes, rules } from '../../shared/utils/consts/consts'
 import styles from './intro-page.module.scss'
+import { MultiContainer } from '../../shared/ui/multi-container/MultiContainer'
 
 export const IntroPage: FC = () => {
 	const [board, setBoard] = useState(new Board())
@@ -27,7 +28,7 @@ export const IntroPage: FC = () => {
 
 	return (
 		<>
-			<div className={styles.container}>
+			<MultiContainer className={styles.container}>
 				<div className={styles.imgContainer}>
 					<img src={Logo2} alt='geeks logo' />
 				</div>
@@ -47,13 +48,9 @@ export const IntroPage: FC = () => {
 							</div>
 						</div>
 						<ul className={styles.rules}>
-							<li>1. Игрок управляет только конем</li>
-							<li>2. На поле появляются GeekCoin</li>
-							<li>
-								3. Задача: Собрать как можно больше GeekCoin за ограниченное
-								число времени
-							</li>
-							<li>4. Только допустимые ходы коня (буквой “Г”)</li>
+							{rules.map((rule) => (
+								<li key={rule.id}>{rule.text}</li>
+							))}
 						</ul>
 					</div>
 					<button
@@ -67,7 +64,7 @@ export const IntroPage: FC = () => {
 						Start the game
 					</button>
 				</Modal>
-			</div>
+			</MultiContainer>
 		</>
 	)
 }
