@@ -79,8 +79,8 @@ export const ResultInfo: FC<{ coins: IScoreCoins }> = ({ coins }) => {
         <p className={classes.title}>leaderboard:</p>{' '}
         {isLoading ? (
           <div className={classes.spinner}>
-						<Spin />
-					</div>
+            <Spin />
+          </div>
         ) : (
           <ul className={classes.list}>
             {data?.slice(0, 3).map((user, idx) => (

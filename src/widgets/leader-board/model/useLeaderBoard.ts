@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { requester } from '../../../shared/api/axios';
+import { $authApi } from '../../../shared/api/axios';
 import type { LeaderBoardDto } from '../../../shared/utils/types';
 
 interface State {
@@ -13,7 +13,7 @@ export const useLeaderBoard = create<State>((set) => ({
   fetchData: async () => {
     try {
       set({ isLoading: true });
-      const { data } = await requester.get('score/top-players');
+      const { data } = await $authApi.get('score/top-players');
       set({ data: data.data });
     } catch (e) {
       return Promise.reject(e);

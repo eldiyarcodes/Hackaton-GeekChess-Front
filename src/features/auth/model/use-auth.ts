@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { requester } from '../../../shared/api/axios';
+import { $mainApi } from '../../../shared/api/axios';
 import { Tokens } from '../../../shared/utils/consts/consts';
 import { type PlayerDto } from './use-user';
 
@@ -21,7 +21,7 @@ export const useAuth = create<TUseAuthProps>((set) => ({
   signUp: async (login, telephone, redirect, setPlayer) => {
     try {
       set({ isLoading: true });
-      const response = await requester.post('auth/sign-up', {
+      const response = await $mainApi.post('auth/sign-up', {
         login,
         telephone,
       });

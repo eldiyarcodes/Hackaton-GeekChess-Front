@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { requester } from '../../../shared/api/axios';
+import { $authApi } from '../../../shared/api/axios';
 import type { LeaderBoardDto } from '../../../shared/utils/types';
 
 interface IResponse {
@@ -15,16 +15,19 @@ export const useSendScore = create<IResponse>((set) => ({
   isLoading: false,
   fetchScore: async (id: string, score: number) => {
     try {
-      set({isLoading: true});
-      const response = await requester.post<IResponse>('score/update-score', { id, score });
+      set({ isLoading: true });
+      const response = await $authApi.post<IResponse>('score/update-score', {
+        id,
+        score,
+      });
       set({
         data: response.data.data,
         message: response.data.message,
       });
     } catch (e) {
       return Promise.reject(e);
-    }finally{
-      set({isLoading: false});
+    } finally {
+      set({ isLoading: false });
     }
   },
 }));
