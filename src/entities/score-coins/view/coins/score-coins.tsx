@@ -12,7 +12,7 @@ import classes from './score-coins.module.scss'
 import { useMediaQuery } from '../../../../shared/hooks/use-media-query'
 
 export const ScoreCoins: FC<{ coins: IScoreCoins }> = ({ coins }) => {
-	const isDesktop = useMediaQuery('(min-width: 414px)');
+	const isDesktop = useMediaQuery('(min-width: 510px)');
 	return (
 		<div className={classes.lost}>
 			{isDesktop && (<Timer />)}

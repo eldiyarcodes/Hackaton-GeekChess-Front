@@ -2,8 +2,8 @@ const audioCache: Record<string, HTMLAudioElement> = {}
 
 export function playSound(type: 'move' | 'capture') {
 	const srcMap: Record<typeof type, string> = {
-		move: '../../../../public/sounds/move_knight.mp3',
-		capture: '../../../../public/sounds/move-monet.mp3',
+		move: '../../../../sounds/move_knight.mp3',
+		capture: '../../../../sounds/move-monet.mp3',
 	}
 
 	const src = srcMap[type]
