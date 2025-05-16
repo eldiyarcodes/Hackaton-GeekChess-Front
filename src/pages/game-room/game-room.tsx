@@ -15,7 +15,7 @@ import { Timer } from '../../entities/score-coins/view/timer/timer';
 
 export const GameRoom: FC = () => {
   const [board, setBoard] = useState(new Board());
-  const isMobile = useMediaQuery('(max-width: 414px)');
+  const isMobile = useMediaQuery('(max-width: 510px)');
   const isGameOver = useGame((state) => state.isGameOver);
 
   useEffect(() => {

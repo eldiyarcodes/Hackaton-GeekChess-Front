@@ -7,7 +7,7 @@
   .title {
     color: #ffffff;
     margin-bottom: 30px;
-    @media screen and (max-width: 414px) {
+    @media screen and (max-width: 510px) {
       display: none;
     }
   }
@@ -21,7 +21,7 @@
   color: #ffffff;
   padding-bottom: 20px;
   border-bottom: 1px solid #666666;
-  @media screen and (max-width: 414px) {
+  @media screen and (max-width: 510px) {
     width: 100vw;
   }
 }

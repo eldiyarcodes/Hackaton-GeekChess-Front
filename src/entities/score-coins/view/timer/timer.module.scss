@@ -12,9 +12,12 @@
   color: #ffffff;
   box-shadow: 0 0 6px 2px #f5d91f;
   margin-bottom: 32px;
-  @media screen and (max-width: 414px) {
+  @media screen and (max-width: 510px) {
     position: relative;
     top: 60px;
     left: 240px;
+  }
+  @media screen and (max-width: 420px) {
+    top: 90px;    
   }
 }

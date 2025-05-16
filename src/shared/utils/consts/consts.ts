@@ -35,7 +35,7 @@ export const Tokens = {
 };
 export const CurrentPlayer = 'CURRENT_PLAYER';
 
-export const GAME_TIMER = 60;
+export const GAME_TIMER = 10;
 
 export type AppRoutes = (typeof AppRoutes)[keyof typeof AppRoutes];
 export type CoinNaminals = (typeof CoinNaminals)[keyof typeof CoinNaminals];
