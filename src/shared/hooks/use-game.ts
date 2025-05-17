@@ -1,17 +1,29 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 import { GAME_MODE } from '../utils/consts/consts';
 
 type TUseGameProps = {
   isGameOver: boolean;
   gameMode: GAME_MODE;
-  setGameMode: (timer: GAME_MODE) => void;
+  startedAt: number | null;
+  setGameMode: (mode: GAME_MODE) => void;
   setIsGameOver: (bool: boolean) => void;
+  setStartedAt: (time: number | null) => void;
 };
 
-export const useGame = create<TUseGameProps>((set) => ({
-  isGameOver: false,
-  gameMode: GAME_MODE.RAPID,
+export const useGame = create<TUseGameProps>()(
+  persist(
+    (set) => ({
+      isGameOver: false,
+      gameMode: GAME_MODE.RAPID,
+      startedAt: null,
 
-  setGameMode: (gameMode) => set({ gameMode }),
-  setIsGameOver: (isGameOver) => set({ isGameOver }),
-}));
+      setGameMode: (mode) => set({ gameMode: mode }),
+      setIsGameOver: (bool) => set({ isGameOver: bool }),
+      setStartedAt: (time) => set({ startedAt: time }),
+    }),
+    {
+      name: 'game-storage',
+    }
+  )
+);

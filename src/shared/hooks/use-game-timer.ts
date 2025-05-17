@@ -1,23 +1,36 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
+import { useGame } from './use-game';
 
-export function useGameTimer(duration: number, onEnd: () => void, key = 0) {
-	const [timeLeft, setTimeLeft] = useState(duration)
+export function useGameTimer(
+  duration: number,
+  onEnd: () => void,
+  timerKey = 0
+) {
+  const [timeLeft, setTimeLeft] = useState(duration * 1000);
+  const { startedAt, setStartedAt } = useGame();
 
-	useEffect(() => {
-		setTimeLeft(duration)
-		const timer = setInterval(() => {
-			setTimeLeft(prev => {
-				if (prev <= 1) {
-					clearInterval(timer)
-					onEnd()
-					return 0
-				}
-				return prev - 1
-			})
-		}, 1000)
+  useEffect(() => {
+    const now = Date.now();
+    const actualStartedAt = startedAt || now;
 
-		return () => clearInterval(timer)
-	}, [key])
+    if (!startedAt) {
+      setStartedAt(now);
+    }
 
-	return timeLeft
+    const endAt = actualStartedAt + duration * 1000;
+
+    const interval = setInterval(() => {
+      const newTimeLeft = Math.max(0, endAt - Date.now());
+      setTimeLeft(newTimeLeft);
+
+      if (newTimeLeft <= 0) {
+        clearInterval(interval);
+        onEnd();
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [timerKey]);
+
+  return Math.ceil(timeLeft / 1000);
 }

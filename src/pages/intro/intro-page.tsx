@@ -10,8 +10,8 @@ import { useGame } from '../../shared/hooks/use-game';
 import { Modal } from '../../shared/ui/modal/modal';
 import { MultiContainer } from '../../shared/ui/multi-container/MultiContainer';
 import { AppRoutes, rules } from '../../shared/utils/consts/consts';
+import { GameModeSelect } from './game-mode-select';
 import styles from './intro-page.module.scss';
-import { GameModeSelect } from './game-mode-select'
 
 export const IntroPage: FC = () => {
   const [board, setBoard] = useState(new Board());
@@ -59,8 +59,17 @@ export const IntroPage: FC = () => {
             </ul>
           </div>
 
-          <GameModeSelect />
-          
+          <div className={styles.actions}>
+            <button
+              type='button'
+              className={styles.toLeaderboard}
+              onClick={() => navigate(AppRoutes.LEADERBOARDS)}
+            >
+              Leaderboards
+            </button>
+            <GameModeSelect />
+          </div>
+
           <div className={styles.btns}>
             <button
               type='button'

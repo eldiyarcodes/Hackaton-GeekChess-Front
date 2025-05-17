@@ -2,6 +2,7 @@ export const AppRoutes = {
   HOME: '/',
   GAME_ROOM: '/game',
   INTRO: '/intro',
+  LEADERBOARDS: '/leaderboards',
   NOT_FOUND: '*',
 } as const;
 
@@ -40,8 +41,8 @@ export const GAME_TIMER = 60;
 export const GAME_MODE = {
   RAPID: 60,
   BLITZ: 30,
-  BULLET: 15
-} as const
+  BULLET: 15,
+} as const;
 
 export type AppRoutes = (typeof AppRoutes)[keyof typeof AppRoutes];
 export type CoinNaminals = (typeof CoinNaminals)[keyof typeof CoinNaminals];
