@@ -1,5 +1,5 @@
 .main {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,10 +13,12 @@
 }
 
 .imageBackground {
+  height: 100%;
+
   background-image: url('../../shared/assets/images/Geeks_pattern_grey1.png');
   background-size: cover;
-  // background-repeat: no-repeat;
-  // background-size: cover;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .mobileIntro {
   width: 190px;

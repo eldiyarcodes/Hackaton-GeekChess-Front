@@ -4,7 +4,7 @@
   height: 100%;
   margin: 0 109px 0 90px;
   @media screen and (max-width: 510px) {
-    height: 100vh;
+    min-height: 100vh;
   }
 }
 

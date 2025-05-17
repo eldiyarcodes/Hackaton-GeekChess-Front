@@ -1,13 +1,31 @@
-import type { FC } from 'react'
-import { useGame } from '../../../../shared/hooks/use-game'
-import { useGameTimer } from '../../../../shared/hooks/use-game-timer'
-import { GAME_TIMER } from '../../../../shared/utils/consts/consts'
-import { formatTime } from '../../../../shared/utils/helpers'
-import classes from './timer.module.scss'
+import type { FC } from 'react';
+import { useUser } from '../../../../features/auth/model/use-user';
+import { useGame } from '../../../../shared/hooks/use-game';
+import { useGameTimer } from '../../../../shared/hooks/use-game-timer';
+import { GAME_TIMER } from '../../../../shared/utils/consts/consts';
+import { formatTime } from '../../../../shared/utils/helpers';
+import { useSendScore } from '../../../../widgets/result/model/useSendScore';
+import classes from './timer.module.scss';
 
-export const Timer: FC = () => {
-	const setIsGameOver = useGame(state => state.setIsGameOver)
-	const timeLeft = useGameTimer(GAME_TIMER, () => setIsGameOver(true))
+export const Timer: FC<{ timerKey: number; totalScore: number }> = ({
+  timerKey,
+  totalScore,
+}) => {
+  const setIsGameOver = useGame((state) => state.setIsGameOver);
+  const { fetchScore } = useSendScore();
+  const { player } = useUser();
 
-	return <div className={classes.timer}>{formatTime(timeLeft)}</div>
-}
+  const timeLeft = useGameTimer(
+    GAME_TIMER,
+    () => {
+      setIsGameOver(true);
+
+      if (player?._id) {
+        fetchScore(player._id, totalScore);
+      }
+    },
+    timerKey
+  );
+
+  return <div className={classes.timer}>{formatTime(timeLeft)}</div>;
+};

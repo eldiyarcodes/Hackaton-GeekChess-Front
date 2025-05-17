@@ -11,11 +11,11 @@ import { Timer } from '../timer/timer'
 import classes from './score-coins.module.scss'
 import { useMediaQuery } from '../../../../shared/hooks/use-media-query'
 
-export const ScoreCoins: FC<{ coins: IScoreCoins }> = ({ coins }) => {
+export const ScoreCoins: FC<{ coins: IScoreCoins, timerKey: number }> = ({ coins, timerKey }) => {
 	const isDesktop = useMediaQuery('(min-width: 510px)');
 	return (
 		<div className={classes.lost}>
-			{isDesktop && (<Timer />)}
+			{isDesktop && (<Timer timerKey={timerKey} totalScore={coins.totalScore} />)}
 			<h3 className={classes.title}>{'SCOREBOARD:'}</h3>
 			<div className={classes.lostList}>
 				<ScoreItem

@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 
-export function useGameTimer(duration: number, onEnd: () => void) {
+export function useGameTimer(duration: number, onEnd: () => void, key = 0) {
 	const [timeLeft, setTimeLeft] = useState(duration)
 
 	useEffect(() => {
+		setTimeLeft(duration)
 		const timer = setInterval(() => {
 			setTimeLeft(prev => {
 				if (prev <= 1) {
@@ -16,7 +17,7 @@ export function useGameTimer(duration: number, onEnd: () => void) {
 		}, 1000)
 
 		return () => clearInterval(timer)
-	}, [])
+	}, [key])
 
 	return timeLeft
 }
