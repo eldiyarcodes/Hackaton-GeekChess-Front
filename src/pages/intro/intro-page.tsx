@@ -11,6 +11,7 @@ import { Modal } from '../../shared/ui/modal/modal';
 import { MultiContainer } from '../../shared/ui/multi-container/MultiContainer';
 import { AppRoutes, rules } from '../../shared/utils/consts/consts';
 import styles from './intro-page.module.scss';
+import { GameModeSelect } from './game-mode-select'
 
 export const IntroPage: FC = () => {
   const [board, setBoard] = useState(new Board());
@@ -57,6 +58,9 @@ export const IntroPage: FC = () => {
               ))}
             </ul>
           </div>
+
+          <GameModeSelect />
+          
           <div className={styles.btns}>
             <button
               type='button'

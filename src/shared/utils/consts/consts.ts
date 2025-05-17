@@ -37,10 +37,17 @@ export const CurrentPlayer = 'CURRENT_PLAYER';
 
 export const GAME_TIMER = 60;
 
+export const GAME_MODE = {
+  RAPID: 60,
+  BLITZ: 30,
+  BULLET: 15
+} as const
+
 export type AppRoutes = (typeof AppRoutes)[keyof typeof AppRoutes];
 export type CoinNaminals = (typeof CoinNaminals)[keyof typeof CoinNaminals];
 export type Colors = (typeof Colors)[keyof typeof Colors];
 export type FigureNames = (typeof FigureNames)[keyof typeof FigureNames];
+export type GAME_MODE = (typeof GAME_MODE)[keyof typeof GAME_MODE];
 
 export const rules = [
   { id: 1, text: 'Игрок управляет только конем' },

@@ -1,17 +1,15 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import { useReducer, useRef, useState, type FC } from 'react';
+import { useReducer, useRef, type FC } from 'react';
+import { AuthLayout } from '../../features/auth/view/auth-layout';
 import Logo2 from '../../shared/assets/images/geeks 2.png';
 import { useMediaQuery } from '../../shared/hooks/use-media-query';
 import styles from './auth-page.module.scss';
-import { AuthBlock } from '../../widgets/auth-block';
-import { AppRoutes } from '../../shared/utils/consts/consts';
 
 export const AuthPage: FC = () => {
   const isMobile = useMediaQuery('(max-width: 510px)');
   const ref = useRef(0);
   const hasRun = useRef(false);
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
-  const [isRegister, setIsRegister] = useState(true);
 
   if (!hasRun.current) {
     hasRun.current = true;
@@ -40,17 +38,7 @@ export const AuthPage: FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      {ref.current >= 1 && (
-        <>
-          <AuthBlock
-            title={isRegister ? 'Registration' : 'Sign In'}
-            buttonText={isRegister ? 'Sign Up' : 'Sign In'}
-            setIsRegister={setIsRegister}
-            redirectPath={AppRoutes.INTRO}
-            isRegister={isRegister}
-          />
-        </>
-      )}
+      {ref.current >= 1 && <AuthLayout />}
     </div>
   );
 };

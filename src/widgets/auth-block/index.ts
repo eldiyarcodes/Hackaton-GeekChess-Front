@@ -1,1 +1,0 @@
-export {AuthBlock} from './view/AuthBlock';

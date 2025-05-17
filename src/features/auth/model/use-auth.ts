@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
-import { toast } from 'react-toastify';
 import { create } from 'zustand';
 import { $mainApi } from '../../../shared/api/axios';
+import { toaster } from '../../../shared/libs/toaster';
 import { Tokens } from '../../../shared/utils/consts/consts';
 import { type PlayerDto } from './use-user';
 
@@ -39,14 +39,14 @@ export const useAuth = create<TUseAuthProps>((set) => ({
 
         localStorage.setItem(Tokens.ACCESS, token);
         setPlayer(player);
-        toast.success(message || 'Регистрация прошла успешно!');
+        toaster('success', message || 'Регистрация прошла успешно!');
         set({ isAuth: true });
         redirect();
       }
     } catch (e: unknown) {
       const err = e as AxiosError<{ message: string }>;
       const message = err?.response?.data?.message || 'Ошибка при регистрации';
-      toast.error(message);
+      toaster('error', message);
       return Promise.reject(e);
     } finally {
       set({ isLoading: false });
@@ -64,14 +64,14 @@ export const useAuth = create<TUseAuthProps>((set) => ({
         const { token, player, message } = response.data;
         localStorage.setItem(Tokens.ACCESS, token);
         setPlayer(player);
-        toast.success(message || 'Авторизация прошла успешно!');
         set({ isAuth: true });
         redirect();
+        toaster('success', message || 'Авторизация прошла успешно!');
       }
     } catch (e: unknown) {
       const err = e as AxiosError<{ message: string }>;
       const message = err?.response?.data?.message || 'Ошибка при авторизации';
-      toast.error(message);
+      toaster('error', message);
       return Promise.reject(e);
     } finally {
       set({ isLoading: false });
