@@ -16,6 +16,7 @@ import styles from './intro-page.module.scss';
 export const IntroPage: FC = () => {
   const [board, setBoard] = useState(new Board());
   const setIsGameOver = useGame((s) => s.setIsGameOver);
+  const setStartedAt = useGame((state) => state.setStartedAt);
   const navigate = useNavigate();
   const { clearPlayer } = useUser();
   const logout = useAuth((s) => s.logout);
@@ -85,7 +86,8 @@ export const IntroPage: FC = () => {
               onClick={() =>
                 logout(
                   () => navigate(AppRoutes.HOME),
-                  () => clearPlayer()
+                  () => clearPlayer(),
+                  setStartedAt
                 )
               }
               type='button'

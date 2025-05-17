@@ -20,7 +20,11 @@ type TUseAuthProps = {
     redirect: () => void,
     setPlayer: (data: PlayerDto | null) => void
   ) => void;
-  logout: (redirectFn: () => void, clearPlayer: () => void) => void;
+  logout: (
+    redirectFn: () => void,
+    clearPlayer: () => void,
+    setStartedAt: (value: number | null) => void
+  ) => void;
 };
 
 export const useAuth = create<TUseAuthProps>((set) => ({
@@ -78,10 +82,11 @@ export const useAuth = create<TUseAuthProps>((set) => ({
     }
   },
 
-  logout: (redirect, clearPlayer) => {
+  logout: (redirect, clearPlayer, setStartedAt) => {
     localStorage.removeItem(Tokens.ACCESS);
     clearPlayer();
     set({ isAuth: false });
     redirect();
+    setStartedAt(null)
   },
 }));
