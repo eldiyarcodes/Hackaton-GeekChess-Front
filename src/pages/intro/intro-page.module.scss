@@ -94,7 +94,7 @@
   color: #1b1b1b;
   padding: 10px 20px;
   border: none;
-  width: 100%;
+  flex: 1;
   border-radius: 6px;
   cursor: pointer;
   font-size: 16px;
@@ -104,7 +104,6 @@
   align-items: center;
   text-decoration: none;
   transition: background-color 0.3s ease;
-  margin-bottom: 10px;
 
   &:hover {
     background-color: #f0b700;
@@ -146,8 +145,15 @@
   }
 }
 
-.quit {
+.btns {
   width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.quit {
+  flex: 1;
   padding: 12px;
   text-align: center;
   border-radius: 4px;

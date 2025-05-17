@@ -57,28 +57,30 @@ export const IntroPage: FC = () => {
               ))}
             </ul>
           </div>
-          <button
-            type='button'
-            onClick={() => {
-              setIsGameOver(false);
-              navigate(AppRoutes.GAME_ROOM);
-            }}
-            className={styles.startButton}
-          >
-            Start the game
-          </button>
-          <button
-            onClick={() =>
-              logout(
-                () => navigate(AppRoutes.HOME),
-                () => clearPlayer()
-              )
-            }
-            type='button'
-            className={styles.quit}
-          >
-            Exit
-          </button>
+          <div className={styles.btns}>
+            <button
+              type='button'
+              onClick={() => {
+                setIsGameOver(false);
+                navigate(AppRoutes.GAME_ROOM);
+              }}
+              className={styles.startButton}
+            >
+              Start the game
+            </button>
+            <button
+              onClick={() =>
+                logout(
+                  () => navigate(AppRoutes.HOME),
+                  () => clearPlayer()
+                )
+              }
+              type='button'
+              className={styles.quit}
+            >
+              Exit
+            </button>
+          </div>
         </Modal>
       </MultiContainer>
     </>
