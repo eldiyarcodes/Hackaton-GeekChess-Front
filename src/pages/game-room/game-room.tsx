@@ -72,7 +72,6 @@ export const GameRoom: FC = () => {
             </div>
             <Timer
               timerKey={timerKey}
-              totalScore={scoreBoardCoins.totalScore}
             />
             <BoardComponent board={board} setBoard={setBoard} />
             <TabBar className={classes.tabBar} defaultActive={0} tabs={tabs} />

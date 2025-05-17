@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { type FC } from 'react';
+import { useEffect, type FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../../features/auth/model/use-user';
 import logo150 from '../../../shared/assets/images/geekcoin 150.svg';
@@ -23,7 +23,14 @@ export const ResultInfo: FC<{ coins: IScoreCoins; onRestart: () => void }> = ({
   const navigate = useNavigate();
   const { data, isLoading } = useSendScore();
   const { player } = useUser();
+  const { fetchScore } = useSendScore();
   const { setIsGameOver } = useGame();
+
+  useEffect(() => {
+    if (player?._id) {
+      fetchScore(player._id, coins.totalScore);
+    }
+  }, []);
 
   return (
     <div className={classes.result}>

@@ -5,17 +5,17 @@ import logo250 from '../../../../shared/assets/images/geekcoin 250.svg'
 import logo300 from '../../../../shared/assets/images/geekcoin 300.svg'
 import logo350 from '../../../../shared/assets/images/geekcoin 350.svg'
 import totalGeekCoins from '../../../../shared/assets/images/total-coins.png'
+import { useMediaQuery } from '../../../../shared/hooks/use-media-query'
 import { ScoreItem } from '../../../../shared/ui'
 import type { IScoreCoins } from '../../../../shared/utils/types'
 import { Timer } from '../timer/timer'
 import classes from './score-coins.module.scss'
-import { useMediaQuery } from '../../../../shared/hooks/use-media-query'
 
 export const ScoreCoins: FC<{ coins: IScoreCoins, timerKey: number }> = ({ coins, timerKey }) => {
 	const isDesktop = useMediaQuery('(min-width: 510px)');
 	return (
 		<div className={classes.lost}>
-			{isDesktop && (<Timer timerKey={timerKey} totalScore={coins.totalScore} />)}
+			{isDesktop && (<Timer timerKey={timerKey} />)}
 			<h3 className={classes.title}>{'SCOREBOARD:'}</h3>
 			<div className={classes.lostList}>
 				<ScoreItem
