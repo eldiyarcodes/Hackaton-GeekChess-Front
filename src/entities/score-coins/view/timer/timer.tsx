@@ -18,9 +18,11 @@ export const Timer: FC<{ timerKey: number; totalScore: number }> = ({
   const timeLeft = useGameTimer(
     GAME_TIMER,
     () => {
+			console.log('⏰ Таймер закончился');
       setIsGameOver(true);
 
       if (player?._id) {
+				console.log('📤 Отправляем результат', player._id, totalScore);
         fetchScore(player._id, totalScore);
       }
     },

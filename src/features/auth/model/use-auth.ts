@@ -1,9 +1,9 @@
-import { create } from 'zustand';
+import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
+import { create } from 'zustand';
 import { $mainApi } from '../../../shared/api/axios';
 import { Tokens } from '../../../shared/utils/consts/consts';
 import { type PlayerDto } from './use-user';
-import { AxiosError } from 'axios';
 
 type TUseAuthProps = {
   isAuth: boolean;
@@ -26,6 +26,7 @@ type TUseAuthProps = {
 export const useAuth = create<TUseAuthProps>((set) => ({
   isAuth: !!localStorage.getItem(Tokens.ACCESS),
   isLoading: false,
+
   signUp: async (login, telephone, redirect, setPlayer) => {
     try {
       set({ isLoading: true });
@@ -35,6 +36,7 @@ export const useAuth = create<TUseAuthProps>((set) => ({
       });
       if (response.status === 200) {
         const { token, player, message } = response.data;
+
         localStorage.setItem(Tokens.ACCESS, token);
         setPlayer(player);
         toast.success(message || 'Регистрация прошла успешно!');
@@ -50,6 +52,7 @@ export const useAuth = create<TUseAuthProps>((set) => ({
       set({ isLoading: false });
     }
   },
+
   signIn: async (login, telephone, redirect, setPlayer) => {
     try {
       set({ isLoading: true });
@@ -74,6 +77,7 @@ export const useAuth = create<TUseAuthProps>((set) => ({
       set({ isLoading: false });
     }
   },
+
   logout: (redirect, clearPlayer) => {
     localStorage.removeItem(Tokens.ACCESS);
     clearPlayer();
