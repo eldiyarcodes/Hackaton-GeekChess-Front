@@ -75,8 +75,8 @@ export const IntroPage: FC = () => {
             <button
               type='button'
               onClick={() => {
-                setIsGameOver(false);
                 navigate(AppRoutes.GAME_ROOM);
+                setIsGameOver(false);
               }}
               className={styles.startButton}
             >

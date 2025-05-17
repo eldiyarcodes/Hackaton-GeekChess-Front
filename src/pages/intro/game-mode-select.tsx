@@ -10,7 +10,12 @@ export function GameModeSelect() {
       title='game-mode'
       value={gameMode}
       onChange={(e) => setGameMode(Number(e.target.value) as GAME_MODE)}
-      style={{ padding: 10, flex: 1, borderRadius: 4, outline: 'none' }}
+      style={{
+        padding: 10,
+        flex: 1,
+        borderRadius: 4,
+        outline: '1px solid #f5d91f',
+      }}
     >
       <option value={GAME_MODE.RAPID}>Rapid (60 сек)</option>
       <option value={GAME_MODE.BLITZ}>Blitz (30 сек)</option>
