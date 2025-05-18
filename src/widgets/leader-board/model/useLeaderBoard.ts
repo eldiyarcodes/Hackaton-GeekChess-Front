@@ -11,7 +11,7 @@ interface State {
   filterMode: GAME_MODE;
   setFilterMode: (mode: GAME_MODE) => void;
 }
-export const useLeaderBoard = create<State>((set, get) => ({
+export const useLeaderBoard = create<State>((set) => ({
   data: [] as LeaderBoardDto[],
   isLoading: false,
 
