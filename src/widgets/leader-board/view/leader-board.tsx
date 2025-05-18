@@ -1,16 +1,22 @@
 import clsx from 'clsx';
 import { useEffect, type FC } from 'react';
 import { useUser } from '../../../features/auth/model/use-user';
+import { useGame } from '../../../shared/hooks/use-game';
 import { Spin } from '../../../shared/ui/spiner/spin';
 import { useLeaderBoard } from '../model/useLeaderBoard';
 import classes from './leader-board.module.scss';
 
-export const LeaderBoard: FC = () => {
-  const { data, fetchData, isLoading } = useLeaderBoard();
+export const LeaderBoard: FC<{ variant: 'page' | 'game-room' }> = ({
+  variant,
+}) => {
+  const { data, getLeaderboards, isLoading, filterMode } = useLeaderBoard();
   const { player } = useUser();
+  const { gameMode } = useGame();
+
   useEffect(() => {
-    fetchData();
-  }, []);
+    getLeaderboards(variant === 'page' ? filterMode : gameMode);
+  }, [filterMode, gameMode]);
+
   return (
     <div className={classes.wrapper}>
       <div className={classes.leaderBoard}>

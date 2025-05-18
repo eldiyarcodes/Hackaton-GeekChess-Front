@@ -33,71 +33,69 @@ export const IntroPage: FC = () => {
   }
 
   return (
-    <>
-      <MultiContainer className={styles.container}>
-        <div className={styles.imgContainer}>
-          <img src={Logo2} alt='geeks logo' />
-        </div>
-        <div className={styles.room}>
-          <BoardComponent board={board} setBoard={setBoard} />
-        </div>
-        <Modal
-          isOpen={true}
-          title='Rules of the game'
-          className={styles.customModal}
-        >
-          <div className={styles.content}>
-            <div className={styles.geeks}>
-              <span className={styles.name}>GEEKS</span>
-              <div className={styles.logoContainer}>
-                <img src={Logo} alt='Logo' />
-              </div>
+    <MultiContainer className={styles.container}>
+      <div className={styles.imgContainer}>
+        <img src={Logo2} alt='geeks logo' />
+      </div>
+      <div className={styles.room}>
+        <BoardComponent board={board} setBoard={setBoard} />
+      </div>
+      <Modal
+        isOpen={true}
+        title='Rules of the game'
+        className={styles.customModal}
+      >
+        <div className={styles.content}>
+          <div className={styles.geeks}>
+            <span className={styles.name}>GEEKS</span>
+            <div className={styles.logoContainer}>
+              <img src={Logo} alt='Logo' />
             </div>
-            <ul className={styles.rules}>
-              {rules.map((rule) => (
-                <li key={rule.id}>{rule.text}</li>
-              ))}
-            </ul>
           </div>
+          <ul className={styles.rules}>
+            {rules.map((rule) => (
+              <li key={rule.id}>{rule.text}</li>
+            ))}
+          </ul>
+        </div>
 
-          <div className={styles.actions}>
-            <button
-              type='button'
-              className={styles.toLeaderboard}
-              onClick={() => navigate(AppRoutes.LEADERBOARDS)}
-            >
-              Leaderboards
-            </button>
-            <GameModeSelect />
-          </div>
+        <div className={styles.actions}>
+          <button
+            type='button'
+            className={styles.toLeaderboard}
+            onClick={() => navigate(AppRoutes.LEADERBOARDS)}
+          >
+            Leaderboards
+          </button>
+          <GameModeSelect />
+        </div>
 
-          <div className={styles.btns}>
-            <button
-              type='button'
-              onClick={() => {
-                navigate(AppRoutes.GAME_ROOM);
-                setIsGameOver(false);
-              }}
-              className={styles.startButton}
-            >
-              Start the game
-            </button>
-            <button
-              onClick={() =>
-                logout(
-                  () => navigate(AppRoutes.HOME),
-                  () => clearPlayer(),
-                  setStartedAt
-                )
-              }
-              type='button'
-              className={styles.quit}
-            >
-              Exit
-            </button>
-          </div>
-        </Modal>
-      </MultiContainer>
-    </>
+        <div className={styles.btns}>
+          <button
+            type='button'
+            onClick={() => {
+              navigate(AppRoutes.GAME_ROOM);
+              setIsGameOver(false);
+            }}
+            className={styles.startButton}
+          >
+            Start the game
+          </button>
+          <button
+            onClick={() =>
+              logout(
+                () => navigate(AppRoutes.HOME),
+                () => clearPlayer(),
+                setStartedAt
+              )
+            }
+            type='button'
+            className={styles.quit}
+          >
+            Exit
+          </button>
+        </div>
+      </Modal>
+    </MultiContainer>
   );
 };

@@ -55,7 +55,7 @@ export const GameRoom: FC = () => {
   };
 
   const tabs = [
-    { label: 'LEADERBOARD:', content: <LeaderBoard /> },
+    { label: 'LEADERBOARD:', content: <LeaderBoard variant={'game-room'} /> },
     {
       label: 'SCOREBOARD:',
       content: <ScoreCoins coins={scoreBoardCoins} timerKey={timerKey} />,
@@ -70,9 +70,7 @@ export const GameRoom: FC = () => {
             <div className={classes.imgContainer}>
               <img src={logo} alt='geeks logo' className={classes.logo} />
             </div>
-            <Timer
-              timerKey={timerKey}
-            />
+            <Timer timerKey={timerKey} />
             <BoardComponent board={board} setBoard={setBoard} />
             <TabBar className={classes.tabBar} defaultActive={0} tabs={tabs} />
           </>
@@ -82,7 +80,7 @@ export const GameRoom: FC = () => {
               <img src={logo} alt='geeks logo' className={classes.logo} />
             </div>
             <div className={classes.evenBoard}>
-              <LeaderBoard />
+              <LeaderBoard variant={'game-room'} />
               <div className={classes.board}>
                 <BoardComponent board={board} setBoard={setBoard} />
               </div>

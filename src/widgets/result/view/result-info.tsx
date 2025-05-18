@@ -24,11 +24,11 @@ export const ResultInfo: FC<{ coins: IScoreCoins; onRestart: () => void }> = ({
   const { data, isLoading } = useSendScore();
   const { player } = useUser();
   const { fetchScore } = useSendScore();
-  const { setIsGameOver } = useGame();
+  const { setIsGameOver, gameMode } = useGame();
 
   useEffect(() => {
     if (player?._id) {
-      fetchScore(player._id, coins.totalScore);
+      fetchScore(player._id, coins.totalScore, gameMode);
     }
   }, []);
 
