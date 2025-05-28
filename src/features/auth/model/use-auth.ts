@@ -38,10 +38,11 @@ export const useAuth = create<TUseAuthProps>((set) => ({
         login,
         telephone,
       });
-      if (response.status === 200) {
-        const { token, player, message } = response.data;
+      if (response.status === 201) {
+        const { access_token, player, message } = response.data;
+        console.log(response.data);
 
-        localStorage.setItem(Tokens.ACCESS, token);
+        localStorage.setItem(Tokens.ACCESS, access_token);
         setPlayer(player);
         toaster('success', message || 'Регистрация прошла успешно!');
         set({ isAuth: true });
@@ -64,9 +65,9 @@ export const useAuth = create<TUseAuthProps>((set) => ({
         login,
         telephone,
       });
-      if (response.status === 200) {
-        const { token, player, message } = response.data;
-        localStorage.setItem(Tokens.ACCESS, token);
+      if (response.status === 201) {
+        const { access_token, player, message } = response.data;
+        localStorage.setItem(Tokens.ACCESS, access_token);
         setPlayer(player);
         set({ isAuth: true });
         redirect();
@@ -87,6 +88,6 @@ export const useAuth = create<TUseAuthProps>((set) => ({
     clearPlayer();
     set({ isAuth: false });
     redirect();
-    setStartedAt(null)
+    setStartedAt(null);
   },
 }));
