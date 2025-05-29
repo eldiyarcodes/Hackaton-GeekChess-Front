@@ -6,14 +6,14 @@ import { BoardComponent } from '../../features/board';
 import { Board } from '../../features/board/model/board';
 import Logo2 from '../../shared/assets/images/geeks 2.png';
 import Logo from '../../shared/assets/images/Logo.svg';
-import { useGame } from '../../shared/hooks/use-game';
 import { Modal } from '../../shared/ui/modal/modal';
 import { MultiContainer } from '../../shared/ui/multi-container/MultiContainer';
-import { AppRoutes, rules } from '../../shared/utils/consts/consts';
+import { ROUTES, rules } from '../../shared/utils/consts/consts';
+import { useGame } from '../../shared/utils/hooks/use-game';
 import { GameModeSelect } from './game-mode-select';
 import styles from './intro-page.module.scss';
 
-export const IntroPage: FC = () => {
+const IntroPage: FC = () => {
   const [board, setBoard] = useState(new Board());
   const setIsGameOver = useGame((s) => s.setIsGameOver);
   const setStartedAt = useGame((state) => state.setStartedAt);
@@ -63,7 +63,7 @@ export const IntroPage: FC = () => {
           <button
             type='button'
             className={styles.toLeaderboard}
-            onClick={() => navigate(AppRoutes.LEADERBOARDS)}
+            onClick={() => navigate(ROUTES.LEADERBOARDS)}
           >
             Leaderboards
           </button>
@@ -74,7 +74,7 @@ export const IntroPage: FC = () => {
           <button
             type='button'
             onClick={() => {
-              navigate(AppRoutes.GAME_ROOM);
+              navigate(ROUTES.GAME_ROOM);
               setIsGameOver(false);
             }}
             className={styles.startButton}
@@ -84,7 +84,7 @@ export const IntroPage: FC = () => {
           <button
             onClick={() =>
               logout(
-                () => navigate(AppRoutes.HOME),
+                () => navigate(ROUTES.HOME),
                 () => clearPlayer(),
                 setStartedAt
               )
@@ -99,3 +99,5 @@ export const IntroPage: FC = () => {
     </MultiContainer>
   );
 };
+
+export const Component = IntroPage;

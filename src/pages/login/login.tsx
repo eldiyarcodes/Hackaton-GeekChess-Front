@@ -1,11 +1,14 @@
+import { LoginForm } from '@/features/auth/view/login-form';
+import { ROUTES } from '@/shared/utils/consts/consts';
+import { AuthLayout } from '@/widgets/auth-layout';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useReducer, useRef, type FC } from 'react';
-import { AuthLayout } from '../../features/auth/view/auth-layout';
+import { Link } from 'react-router-dom';
 import Logo2 from '../../shared/assets/images/geeks 2.png';
-import { useMediaQuery } from '../../shared/hooks/use-media-query';
-import styles from './auth-page.module.scss';
+import { useMediaQuery } from '../../shared/utils/hooks/use-media-query';
+import styles from './login.module.scss';
 
-export const AuthPage: FC = () => {
+const Login: FC = () => {
   const isMobile = useMediaQuery('(max-width: 510px)');
   const ref = useRef(0);
   const hasRun = useRef(false);
@@ -38,7 +41,20 @@ export const AuthPage: FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      {ref.current >= 1 && <AuthLayout />}
+      {ref.current >= 1 && (
+        <AuthLayout
+          title='Log in'
+          form={<LoginForm />}
+          footerText={
+            <>
+              First time here?{' '}
+              <Link to={ROUTES.REGISTER}>Sign up for free</Link>
+            </>
+          }
+        />
+      )}
     </div>
   );
 };
+
+export const Component = Login;

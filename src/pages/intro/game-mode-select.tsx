@@ -1,5 +1,5 @@
-import { useGame } from '../../shared/hooks/use-game';
 import { GAME_MODE } from '../../shared/utils/consts/consts';
+import { useGame } from '../../shared/utils/hooks/use-game';
 
 export function GameModeSelect() {
   const gameMode = useGame((state) => state.gameMode);

@@ -1,1 +1,1 @@
-export { AuthForm } from './view/auth-form';
+export { AuthForm } from './view/login-form';

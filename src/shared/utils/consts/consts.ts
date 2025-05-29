@@ -1,5 +1,7 @@
-export const AppRoutes = {
+export const ROUTES = {
   HOME: '/',
+  REGISTER: '/sign-up',
+  LOGIN: '/sign-in',
   GAME_ROOM: '/game',
   INTRO: '/intro',
   LEADERBOARDS: '/leaderboards',
@@ -44,7 +46,7 @@ export const GAME_MODE = {
   BULLET: 15,
 } as const;
 
-export type AppRoutes = (typeof AppRoutes)[keyof typeof AppRoutes];
+export type ROUTES = (typeof ROUTES)[keyof typeof ROUTES];
 export type CoinNaminals = (typeof CoinNaminals)[keyof typeof CoinNaminals];
 export type Colors = (typeof Colors)[keyof typeof Colors];
 export type FigureNames = (typeof FigureNames)[keyof typeof FigureNames];

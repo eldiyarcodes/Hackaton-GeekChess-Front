@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
+import { toast } from 'sonner';
 import { create } from 'zustand';
 import { $mainApi } from '../../../shared/api/axios';
-import { toaster } from '../../../shared/libs/toaster';
 import { Tokens } from '../../../shared/utils/consts/consts';
 import { type PlayerDto } from './use-user';
 
@@ -38,20 +38,20 @@ export const useAuth = create<TUseAuthProps>((set) => ({
         login,
         telephone,
       });
-      if (response.status === 200) {
-        const { token, player, message } = response.data;
+      if (response.status === 201) {
+        const { access_token, player, message } = response.data;
+        console.log(response.data);
 
-        localStorage.setItem(Tokens.ACCESS, token);
+        localStorage.setItem(Tokens.ACCESS, access_token);
         setPlayer(player);
-        toaster('success', message || 'Регистрация прошла успешно!');
+        toast.success(message || 'Регистрация прошла успешно!');
         set({ isAuth: true });
         redirect();
       }
-    } catch (e: unknown) {
-      const err = e as AxiosError<{ message: string }>;
-      const message = err?.response?.data?.message || 'Ошибка при регистрации';
-      toaster('error', message);
-      return Promise.reject(e);
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        toast.error(e.response?.data?.message || 'Ошибка при регистрации');
+      }
     } finally {
       set({ isLoading: false });
     }
@@ -64,19 +64,18 @@ export const useAuth = create<TUseAuthProps>((set) => ({
         login,
         telephone,
       });
-      if (response.status === 200) {
-        const { token, player, message } = response.data;
-        localStorage.setItem(Tokens.ACCESS, token);
+      if (response.status === 201) {
+        const { access_token, player, message } = response.data;
+        localStorage.setItem(Tokens.ACCESS, access_token);
         setPlayer(player);
         set({ isAuth: true });
         redirect();
-        toaster('success', message || 'Авторизация прошла успешно!');
+        toast.success(message || 'Авторизация прошла успешно!');
       }
-    } catch (e: unknown) {
-      const err = e as AxiosError<{ message: string }>;
-      const message = err?.response?.data?.message || 'Ошибка при авторизации';
-      toaster('error', message);
-      return Promise.reject(e);
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        toast.error(e.response?.data?.message || 'Ошибка при авторизации');
+      }
     } finally {
       set({ isLoading: false });
     }
@@ -87,6 +86,6 @@ export const useAuth = create<TUseAuthProps>((set) => ({
     clearPlayer();
     set({ isAuth: false });
     redirect();
-    setStartedAt(null)
+    setStartedAt(null);
   },
 }));

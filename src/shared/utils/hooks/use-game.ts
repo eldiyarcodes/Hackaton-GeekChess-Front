@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { GAME_MODE } from '../utils/consts/consts';
+import { GAME_MODE } from '../consts/consts';
 
 type TUseGameProps = {
   isGameOver: boolean;
