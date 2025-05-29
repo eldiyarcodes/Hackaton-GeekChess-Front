@@ -8,10 +8,10 @@ import logo250 from '../../../shared/assets/images/geekcoin 250.svg';
 import logo300 from '../../../shared/assets/images/geekcoin 300.svg';
 import logo350 from '../../../shared/assets/images/geekcoin 350.svg';
 import totalGeekCoins from '../../../shared/assets/images/total-coins.png';
-import { useGame } from '../../../shared/hooks/use-game';
 import { ScoreItem } from '../../../shared/ui';
 import { Spin } from '../../../shared/ui/spiner/spin';
-import { AppRoutes } from '../../../shared/utils/consts/consts';
+import { ROUTES } from '../../../shared/utils/consts/consts';
+import { useGame } from '../../../shared/utils/hooks/use-game';
 import type { IScoreCoins } from '../../../shared/utils/types';
 import { useSendScore } from '../model/useSendScore';
 import classes from './result-info.module.scss';
@@ -116,7 +116,7 @@ export const ResultInfo: FC<{ coins: IScoreCoins; onRestart: () => void }> = ({
           Restart
         </button>
         <button
-          onClick={() => navigate(AppRoutes.INTRO)}
+          onClick={() => navigate(ROUTES.INTRO)}
           type='button'
           className={classes.quit}
         >

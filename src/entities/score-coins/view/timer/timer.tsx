@@ -1,7 +1,7 @@
 import type { FC } from 'react';
-import { useGame } from '../../../../shared/hooks/use-game';
-import { useGameTimer } from '../../../../shared/hooks/use-game-timer';
 import { formatTime } from '../../../../shared/utils/helpers';
+import { useGame } from '../../../../shared/utils/hooks/use-game';
+import { useGameTimer } from '../../../../shared/utils/hooks/use-game-timer';
 import classes from './timer.module.scss';
 
 export const Timer: FC<{ timerKey: number }> = ({ timerKey }) => {

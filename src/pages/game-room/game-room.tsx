@@ -4,16 +4,16 @@ import { Timer } from '../../entities/score-coins/view/timer/timer';
 import { BoardComponent } from '../../features/board';
 import { Board } from '../../features/board/model/board';
 import logo from '../../shared/assets/images/geeks 2.png';
-import { useGame } from '../../shared/hooks/use-game';
-import { useMediaQuery } from '../../shared/hooks/use-media-query';
 import { Modal } from '../../shared/ui';
 import { MultiContainer } from '../../shared/ui/multi-container/MultiContainer';
 import { TabBar } from '../../shared/ui/tab-bar/TabBar';
+import { useGame } from '../../shared/utils/hooks/use-game';
+import { useMediaQuery } from '../../shared/utils/hooks/use-media-query';
 import { LeaderBoard } from '../../widgets/leader-board';
 import { ResultInfo } from '../../widgets/result';
 import classes from './game-room.module.scss';
 
-export const GameRoom: FC = () => {
+const GameRoom: FC = () => {
   const [board, setBoard] = useState(new Board());
   const [timerKey, setTimerKey] = useState(0);
   const isMobile = useMediaQuery('(max-width: 510px)');
@@ -95,3 +95,5 @@ export const GameRoom: FC = () => {
     </div>
   );
 };
+
+export const Component = GameRoom;

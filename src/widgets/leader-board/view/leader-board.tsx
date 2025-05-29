@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import { useEffect, type FC } from 'react';
 import { useUser } from '../../../features/auth/model/use-user';
-import { useGame } from '../../../shared/hooks/use-game';
 import { Spin } from '../../../shared/ui/spiner/spin';
+import { useGame } from '../../../shared/utils/hooks/use-game';
 import { useLeaderBoard } from '../model/useLeaderBoard';
 import classes from './leader-board.module.scss';
 

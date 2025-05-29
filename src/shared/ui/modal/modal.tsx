@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import type { FC, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import { useDisableScroll } from '../../hooks/use-disable-scroll';
+import { useDisableScroll } from '../../utils/hooks/use-disable-scroll';
 import classes from './modal.module.scss';
 
 interface IModalProps {
